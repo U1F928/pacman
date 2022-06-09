@@ -1,0 +1,136 @@
+# Pacman? (Téma Pacman)
+
+Autor: Albert Kučera
+
+## Téma z Progtestu
+
+Implementujte klasickou hru Pacman proti počítači (můžete naimplementovat i jiné varianty).
+
+Hra musí splňovat následující funkcionality:
+
+    1.  Dodržování základních pravidel, sbírání bonusů, míncí (teček), třešniček, teleporty, atp.
+
+    2.  Je implementováno několik druhů AI duchů. Hra musí umět zároveň zobrazovat různé duchy s různými AI. 
+                Zobrazování duchů s různou AI se pro přehlednost může lišit např. barvou nebo znakem.
+
+    3.  Lze načítat mapy ze souboru (bludiště + pozice bonusů a duchů).
+
+    4.  Konfigurovatelná obtížnost hry ze souboru 
+                (rychlost duchů, délka trvání jednotlivých módů hry, pravděpodobnost přidání nového bonusu do mapy, ...)
+
+    5.  Škálovatelná obtížnost duchů (více strategií duchů dle obtížnost, dle různého chování)
+
+Kde lze využít polymorfismus? (doporučené)
+
+    Rozdělení hráčů: hráč, duch (různé druhy umělé inteligence)
+    Mód hry: 
+                klasický (duchové chodí dle svých strategií), 
+                zběsilý (duchové pronásledují hráče), 
+                nezranitelný (duchové jsou pomalejší, dají se zabít)
+
+    Herní políčko: zem, stěna, bod, bonus (změna módu), třešnička (více bodů), teleport
+    Uživatelské rozhraní: konzole, ncurses, SDL, OpenGL (různé varianty), ...
+
+## Zadání hry "Pacman?"
+
+        Vytvoříme hru "Pacman?", uživatel hru spustí a zobrazí se mu v konzoli menu. 
+        V menu si hráč vybere z jakého souboru načíst mapu, nastaví celkovou rychlost hry, rychlost duchů, a délku trvání             efektu umožňujícího hráči pojídat duchy. 
+
+
+        Pak hráč může začít hru.
+
+        Mapa se skládá z entit. Entity jsou následující:
+
+        '#' Zeď, políčko na kterém je tato entita, nemůže hostit ani ducha ani hráče
+
+        '!' Respawn point, na políčko s touto entitou se snědění duchové vrátí, aby se respawnuli
+
+        '1' Teleport/Wormhole, navštívení políčka s touto entitou, teleportuje hráče na nejbližší políčko s teleportem se stejným číslem
+
+        '~' Power pellet, pokud je entita na stejném políčku jako hráč, 
+                hráč získá na omezenou dobu schopnost pojídat duchy, Power pellet je odebrána 
+
+        '*' Mince, pokud je entita na stejném políčku jako hráč, je zvýšeno skóre
+
+        '%' Ovoce, pokud je entita na stejném políčku jako hráč, je zvýšeno skóre, entita je spawnuta až když je snědeno 50% mincí
+
+        'p'/'P' Hráč, Pacman, ovládaný hráčem, hráč mění směr, kterým se Pacman ubírá, počáteční směr je nahoru, 
+                        (k ubrání života duchem dojde když je duch na stejném či sousedním políčku)
+
+        'h' Duch, kategorie (h)unter, snaží se dostat na políčko na kterém je hráč
+
+        'w' Duch, kategorie (w)anderer, vybere si náhodně políčko, na toto políčko putuje bez ohledu na hráče, 
+                když na vybrané políčko doputuje, vybere si náhodně další políčko na které bude putovat
+
+        'i' Duch, kategorie (i)mitator, pohybuje se vždy ve stejném směru jako hráč
+
+        'm' Duch, kategorie (m)imic, pohybuje se vždy ve opačném směru jako hráč
+
+        -- poznámka k entitám kategorie Duch 
+                entity kategorie Duch v "Pacman?" nehledají cestu skrz ostatní duchy, 
+                hráč tedy  může šikovně využít vlastností důchu mimic a imitator k odříznutí cesty nebezpečnějším duchům
+
+### Kde je polymorfismus?
+
+Přibližný pseudokód náčrt:
+
+class Game // <= tady není polymorfismus
+{
+        void drawGameState(const GameState& g)
+        {
+                ... ncurses ...
+        }
+        void mainLoop()
+        {
+                char userInput = getch();
+                currentGameState.insertUserInput(userInput);
+                nextGameState = currentGameState.futureSelf();
+                currentGameState = nextGameState;
+                drawGameState(currentGameState);
+        }
+};
+
+class GameState // <= tady není polymorfismus
+{
+        vector<shared_ptr<GameEntity>> gameEntities;
+        void setResultIfFinalState()
+        {
+                ... hráč má 0 životů -> Loss,  nebo všechny mince snědeny -> Victory ...
+        }
+public:
+        void insertUserInput(char userInput)
+        {
+                ...
+        }
+
+        GameState futureSelf()
+        {
+                GameState futureGameState;
+                for(gameEntity : gameEntities)
+                {
+                        futureGameState.gameEntities.push_back(gameEntity.futureSelf(*this));
+                }
+                ... nastav do futureGameState dalsi vlastnosti, jako např. skore ...
+                futureGameState.SetResultIfFinalState();
+                return futureGameState;
+        }
+}
+class GameEntity // <= tady je polymorfismus
+{
+        shared_ptr<GameEntity> clone() = 0;
+        shared_ptr<GameEntity> futureSelf(const GameState& g)
+        {
+                shared_ptr<GameEntity> futureGameEntity = clone();
+                ... nastav vlastnosti futureGameEntity (např. pozici) na základě GameState ...
+                return futureGameEntity;
+        }
+}
+
+Budeme tedy mít třídu Game, GameState a GameEntity, (to nejsou všechny třídy)
+
+V mainLoop v Game bereme vstup hráče a vkládáme ho do GameState, zavoláme pak GameState.futureSelf(), a výsledek volání uložíme pod nextGameState. Pak nextGameState uložíme jako currentGameState, a currentGameState zobrazíme/vykreslíme uživateli. 
+
+V třídě GameState máme uloženy všechny GameEntity. Všechno co je na mapě, je reprezentováno abstraktní třídou GameEntity. Třída GameEntity bude mít funkci futureSelf(const GameState& g), která na základě daného GameState vrátí svoji budoucí verzi. Budoucí verzi GameState získáme tak, že pro každou uloženou GameEntity zavoláme GameEntity.futureSelf(const GameState& g) a budoucí verze uložíme do nového GameState, který z funkce vrátíme.
+
+Polymorfismus zde snad usnadní práci se všemi herními entitami, díky jednotnému rozhraní. Pro každou entitu tedy stačí nadefinovat jak vytvořit její budoucí verzi na základě aktuálního stavu hry. Případně ještě dodefinovat logiku v GameState, pokud stav této entity přímo ovlivňuje fakt, kdy nastane konec hry (např. pro entitu hráč, když má entita <=0 životů)
+
