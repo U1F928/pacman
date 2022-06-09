@@ -6,7 +6,6 @@
 #include "PlayerEat.h"
 #include "PlayerCanEat.h"
 #include "PlayerCanBeEaten.h"
-
 #include "../../Logger.h"
 class Interaction;
 Player::Player(char symbol, std::pair<int, int> position, int speedLevel, std::pair<int, int> direction, int lifeCount, int score)
@@ -20,7 +19,7 @@ Player::Player(char symbol, std::pair<int, int> position, int speedLevel, std::p
 {
 }
 
-Player::Player(const Player& player)
+Player& Player::operator = (const Player& player)
 {
 	this->symbol = player.symbol;
 	this->speedLevel= player.speedLevel;
@@ -28,8 +27,14 @@ Player::Player(const Player& player)
 	this->direction = player.direction;
 	this->lifeCount = player.lifeCount;
 	this->score = player.score;
+	return (*this);
 }
-// TODO: assignment operator
+
+Player::Player(const Player& player)
+{
+	(*this) = player;
+}
+
 Player::~Player() = default;
 
 char Player::getSymbol() const
@@ -108,10 +113,12 @@ std::shared_ptr<Player> Player::updatePlayer(const GameState& gameState) const
 	updatedPlayer->updateDirectionByUserInput(gameState.getUserInput());
 	return updatedPlayer;
 }
+
 std::shared_ptr<GameEntity> Player::update(const GameState& gameState) const 
 {
 	return this->updatePlayer(gameState);
 }
+
 bool Player::updateDirectionByUserInput(char userInput)
 {
 	std::map<char, std::pair<int, int>> directionByUserInput =
@@ -128,6 +135,7 @@ bool Player::updateDirectionByUserInput(char userInput)
 	this->direction = directionByUserInput[userInput];
 	return true;
 }
+
 void Player::updatePosition(const GameState& gameState)
 {
 	if(this->speedLevel < gameState.getSpeedLevel())
@@ -142,6 +150,7 @@ void Player::updatePosition(const GameState& gameState)
 		this->position = updatedPosition;
 	}
 }
+
 void Player::updateScore(const GameState& gameState)
 {
 	std::vector<std::shared_ptr<GameEntity>> entitiesOnSameTile = gameState.getEntitiesByPosition(this->position);
@@ -151,10 +160,12 @@ void Player::updateScore(const GameState& gameState)
 		this->eat(*entity);
 	}
 }
+
 void Player::updateLifeCount(const GameState& gameState)
 {
 	this->lifeCount -= this->wasEaten(gameState);
 }
+
 bool Player::wasEaten(const GameState& gameState)
 {
 	std::vector<std::shared_ptr<GameEntity>> entitiesOnSameTile = gameState.getEntitiesByPosition(this->position);

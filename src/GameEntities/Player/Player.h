@@ -5,8 +5,9 @@ class Interaction;
 class Player : public GameEntity
 {
 public:
-
 	Player(char symbol, std::pair<int, int> position, int speedLevel, std::pair<int, int> direction, int lifeCount, int Score);
+
+	Player& operator = (const Player& player);
 
 	Player(const Player& player);
 
@@ -22,8 +23,6 @@ public:
 
 	void acceptInteraction(Interaction& interaction) const override;
 
-
-
 	std::shared_ptr<Player> clonePlayer() const;
 
 	std::shared_ptr<GameEntity> clone() const override;
@@ -32,6 +31,14 @@ public:
 
 	std::shared_ptr<GameEntity> update(const GameState& gameState) const override;
 private:
+	char symbol;
+	std::pair<int, int> position;
+	int speedLevel;
+	std::pair<int, int> direction;
+	int lifeCount;
+
+	int score;
+
 	bool canEat(const GameEntity& gameEntity) const;
 
 	void eat(const GameEntity& gameEntity);
@@ -40,19 +47,16 @@ private:
 
 	void shareTileWith(const GameEntity& gameEntity);
 
-
-	char symbol;
-	std::pair<int, int> position;
-	int speedLevel;
-	std::pair<int, int> direction;
-	int lifeCount;
-	int score;
-
 	bool updateDirectionByUserInput(char userInput);
+
 	void updatePosition(const GameState& gameState);
+
 	void updateScore(const GameState& gameState);
+
 	void updateLifeCount(const GameState& gameState);
+
 	bool wasEaten(const GameState& gameState);
+
 	bool canAccessPosition(const GameState& gameState, std::pair<int, int> position) const;
 
 

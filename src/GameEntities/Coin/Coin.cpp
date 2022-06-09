@@ -3,7 +3,6 @@
 #include "CoinCanBeEaten.h"
 #include "../../Logger.h"
 class Interaction;
-
 Coin::Coin(char symbol, std::pair<int, int> position)
 :
 	symbol(symbol),
@@ -11,10 +10,16 @@ Coin::Coin(char symbol, std::pair<int, int> position)
 {
 }
 
-Coin::Coin(const Coin& coin)
+Coin& Coin::operator = (const Coin& coin)
 {
 	this->symbol = coin.symbol;
 	this->position= coin.position;
+	return (*this);
+}
+
+Coin::Coin(const Coin& coin)
+{
+	(*this) = coin;
 }
 
 Coin::~Coin() = default;
