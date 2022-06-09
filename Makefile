@@ -4,7 +4,7 @@
 
 LD=g++
 CXX=g++
-CXXFLAGS=-Wall -Wfatal-errors -pedantic -std=c++17 -g
+CXXFLAGS=-Wall -Wfatal-errors -pedantic -std=c++17 -g -D=LOGGING_ON
 LIBS=-lncurses
 
 SOURCES=$(wildcard *.cpp) $(wildcard /*/*.cpp) 
@@ -19,6 +19,7 @@ kuceralb: 														\
 	src/GameEntities/Coin/Coin.o                              	\
 	src/GameEntities/Coin/CoinCanBeEaten.o                    	\
 	src/GameState.o                                           	\
+	src/LevelLoader.o                                           \
 	src/Game.o                                                	\
 	src/main.cpp                                              
 

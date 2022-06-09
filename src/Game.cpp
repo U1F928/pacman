@@ -6,8 +6,10 @@
 #include <memory>
 #include <set>
 #include <fstream>
+#include <string>
 #include <ncurses.h>
 #include "Game.h"
+#include "LevelLoader.h"
 #include "GameState.h"
 #include "GameEntities/Player/Player.h"
 #include "GameEntities/Coin/Coin.h"
@@ -16,6 +18,8 @@
 bool Game::loadMapFromFile(std::string pathToFile)
 {
 	// TODO load from file
+	LevelLoader levelLoader;
+	levelLoader.loadFromFile(std::string("zadani.txt"));
 	this->currentGameState.insertRequiredScoreToWin(3);
 	this->currentGameState.insertEntity(std::make_shared<Coin>(Coin('O', {5, 5})));
 	this->currentGameState.insertEntity(std::make_shared<Coin>(Coin('O', {15, 15})));
@@ -23,6 +27,7 @@ bool Game::loadMapFromFile(std::string pathToFile)
 	Player player('P', {10, 0}, 9, {1, 0}, 3, 0);
 	this->currentGameState.insertPlayer(std::make_shared<Player>(player));
 	this->currentGameState.setSpeedLevel(10);
+
 	return true;
 }
 void Game::start()
