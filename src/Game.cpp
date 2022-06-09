@@ -19,7 +19,7 @@ bool Game::loadMapFromFile(std::string pathToFile)
 {
 	// TODO load from file
 	LevelLoader levelLoader;
-	levelLoader.loadFromFile(std::string("zadani.txt"));
+	levelLoader.loadFromFile(std::string("src/Game.h"));
 	this->currentGameState.insertRequiredScoreToWin(3);
 	this->currentGameState.insertEntity(std::make_shared<Coin>(Coin('O', {5, 5})));
 	this->currentGameState.insertEntity(std::make_shared<Coin>(Coin('O', {15, 15})));
@@ -38,7 +38,6 @@ void Game::start()
 }
 void Game::mainLoop()
 {
-
 	int deltaTime = 0;
 	while(true)
 	{
