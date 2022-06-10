@@ -34,6 +34,7 @@ void Game::start()
 	startLog();
 	this->time = std::chrono::steady_clock::now();
 	this->setUpNcurses();
+	this->quitGame = false;
 	this->mainLoop();
 }
 void Game::mainLoop()
@@ -42,6 +43,11 @@ void Game::mainLoop()
 	while(true)
 	{
 		this->handleUserInput();
+		if(this->quitGame)
+		{
+			this->endNcurses();
+			return;
+		}
 		deltaTime += this->getElapsedMicroseconds();
 		while(deltaTime > this->microsecondsPerFrame)
 		{
@@ -53,7 +59,6 @@ void Game::mainLoop()
 		this->drawGameState(this->currentGameState);
 	}
 }
-
 void Game::setUpNcurses()
 {
     initscr();                 
@@ -71,23 +76,45 @@ int Game::getElapsedMicroseconds()
 void Game::handleUserInput()
 {
 	char userInput = getch();
-	std::set<char> validInputs = {'h', 'j', 'k', 'l'};
-	if(validInputs.find(userInput) != validInputs.end())
+	const char escapeKey = 27;
+	if(userInput == escapeKey)
+	{
+		this->quitGame = true;
+		return;
+	}
+	std::set<char> validGameStateInput = {'h', 'j', 'k', 'l'};
+	if(validGameStateInput.find(userInput) != validGameStateInput.end())
 	{
 		this->currentGameState.insertUserInput(userInput);
 	}
 }
+void Game::endNcurses()
+{
+	endwin();
+}
+
 void Game::drawGameState(const GameState& gameState)
 {
 	// TODO: add priority for overlapping entities
     erase();
+	this->drawGameInfo(gameState);
+	this->drawEntities(gameState);
+    refresh();
+}
+void Game::drawEntities(const GameState& gameState)
+{
 	std::vector<std::shared_ptr<GameEntity>> entities = gameState.getAllEntities();
 	for(std::shared_ptr<GameEntity> entity : entities)
 	{
 		std::pair<int, int> position = entity->getPosition();
-		move(position.first, position.second);
+		move(position.first, position.second + 2);
     	addch(entity->getSymbol()); 
 	}
-    refresh();
+
+}
+void Game::drawGameInfo(const GameState& gameState)
+{
+	move(0, 0);
+	printw("SCORE: 1");
 }
 
