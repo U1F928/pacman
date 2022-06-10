@@ -103,11 +103,12 @@ void Game::drawGameState(const GameState& gameState)
 }
 void Game::drawEntities(const GameState& gameState)
 {
+	const int offset = 2;
 	std::vector<std::shared_ptr<GameEntity>> entities = gameState.getAllEntities();
 	for(std::shared_ptr<GameEntity> entity : entities)
 	{
 		std::pair<int, int> position = entity->getPosition();
-		move(position.first, position.second + 2);
+		move(position.first, position.second + offset);
     	addch(entity->getSymbol()); 
 	}
 
@@ -115,6 +116,11 @@ void Game::drawEntities(const GameState& gameState)
 void Game::drawGameInfo(const GameState& gameState)
 {
 	move(0, 0);
-	printw("SCORE: 1");
+	std::string currentScore = std::to_string(gameState.getPlayerScore());
+	std::string requiredScore = std::to_string(gameState.getRequiredScore ());
+	printw("SCORE: ");
+	printw(currentScore.c_str());
+	printw("/");
+	printw(requiredScore.c_str());
 }
 

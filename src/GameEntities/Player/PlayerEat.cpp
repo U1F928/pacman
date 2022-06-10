@@ -1,4 +1,5 @@
 #include "PlayerEat.h"
+#include "Player.h"
 PlayerEat::PlayerEat(Player& player)
 :
 	player(player)
@@ -6,7 +7,8 @@ PlayerEat::PlayerEat(Player& player)
 }
 void PlayerEat::interact(const Coin& coin)
 {
-	// do nothing
+	const int coinScore = 1;
+	this->player.setScore(this->player.getScore() + coinScore);
 }
 void PlayerEat::interact(const Player& player)
 {

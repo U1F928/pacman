@@ -26,6 +26,8 @@ public:
 	std::pair<int, int> getPosition() const override;
 
 	int getScore() const;
+	
+	void setScore(int score);
 
 	int getLifeCount() const;
 

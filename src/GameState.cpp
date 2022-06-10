@@ -67,7 +67,10 @@ void GameState::insertUserInput(char userInput)
 {
 	this->userInput = userInput;
 }
-
+int GameState::getRequiredScore() const
+{
+	return this->requiredScore;
+}
 void GameState::insertPlayer(std::shared_ptr<Player> playerEntity)
 {
 	this->playerEntity = playerEntity;

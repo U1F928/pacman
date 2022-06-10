@@ -60,6 +60,11 @@ int Player::getScore() const
 	return this->score;
 }
 
+void Player::setScore(int score)
+{
+	this->score = score;
+}
+
 int Player::getLifeCount() const
 {
 	return this->lifeCount;

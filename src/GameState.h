@@ -22,6 +22,7 @@ public:
 	char getUserInput() const;
 	int getPlayerScore() const;
 	int getPlayerLifeCount() const;
+	int getRequiredScore() const;
 	bool playerLost();
 	bool playerWon();
 
