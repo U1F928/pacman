@@ -2,6 +2,6 @@
 int main()
 {
 	Game newGame;
-	newGame.loadMapFromFile("sdfd");
+	newGame.loadMapFromFile("examples/gameLevel1");
 	newGame.start();
 }

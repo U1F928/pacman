@@ -19,21 +19,33 @@ bool Game::loadMapFromFile(std::string pathToFile)
 {
 	// TODO load from file
 	LevelLoader levelLoader;
-	levelLoader.loadFromFile(std::string("src/Game.h"));
-	this->currentGameState.insertRequiredScoreToWin(3);
-	this->currentGameState.insertEntity(std::make_shared<Coin>(Coin('O', {5, 5})));
-	this->currentGameState.insertEntity(std::make_shared<Coin>(Coin('O', {15, 15})));
-	this->currentGameState.insertEntity(std::make_shared<Coin>(Coin('O', {20, 20})));
-	Player player('P', {10, 0}, 9, {1, 0}, 3, 0);
-	this->currentGameState.insertPlayer(std::make_shared<Player>(player));
-	this->currentGameState.setSpeedLevel(10);
+	if(!levelLoader.loadFromFile(std::string(pathToFile)))
+	{
+		startLog();
+		log("failed load from file");
+		return false;
+	}
+	levelLoader.loadIntoGameState(this->currentGameState);
+	//this->currentGameState.setMaxSpeedLevel(10);
+	//this->currentGameState.insertUserInput(0);
+	//this->currentGameState.insertRequiredScoreToWin(3);
+	//this->currentGameState.insertEntity(std::make_shared<Coin>(Coin('O', {5, 5})));
+	//this->currentGameState.insertEntity(std::make_shared<Coin>(Coin('O', {15, 15})));
+	//this->currentGameState.insertEntity(std::make_shared<Coin>(Coin('O', {20, 20})));
+	//Player player('P', {10, 0}, 9, {1, 0}, 3, 0);
+	//this->currentGameState.insertPlayer(std::make_shared<Player>(player));
 
 	return true;
 }
 void Game::start()
 {
-	this->setUpNcurses();
+	if(!this->loadMapFromFile("examples/gameLevel1"))
+	{
+		std::cout << "ERROR LOADING FILE" << std::endl;
+		return;
+	}
 	this->time = std::chrono::steady_clock::now();
+	this->setUpNcurses();
 	this->mainLoop();
 }
 void Game::mainLoop()
@@ -46,12 +58,9 @@ void Game::mainLoop()
 		while(deltaTime > this->microsecondsPerFrame)
 		{
 			this->currentGameState.setSpeedLevel(currentGameState.getSpeedLevel() - 1);
-			if(this->currentGameState.getSpeedLevel() < 0)
-			{
-				this->currentGameState.setSpeedLevel(this->maxSpeedLevel); 
-			}
-			GameState nextGameState = this->currentGameState.update();
-			this->currentGameState = nextGameState;
+			startLog();
+			log("speedLevel:"); log(this->currentGameState.getSpeedLevel());log("\n");
+			this->currentGameState = this->currentGameState.update();
 			deltaTime -= this->microsecondsPerFrame ;
 		}
 		this->drawGameState(this->currentGameState);

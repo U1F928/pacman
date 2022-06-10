@@ -15,6 +15,5 @@ private:
 	void drawGameState(const GameState& gameState);
 	std::chrono::steady_clock::time_point time; 
 	const int microsecondsPerFrame = 200000;
-	const int maxSpeedLevel = 10;
 	GameState currentGameState;
 };
