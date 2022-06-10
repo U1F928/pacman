@@ -95,7 +95,6 @@ void Game::endNcurses()
 
 void Game::drawGameState(const GameState& gameState)
 {
-	// TODO: add priority for overlapping entities
     erase();
 	this->drawGameInfo(gameState);
 	this->drawEntities(gameState);
@@ -103,6 +102,8 @@ void Game::drawGameState(const GameState& gameState)
 }
 void Game::drawEntities(const GameState& gameState)
 {
+	// TODO: add priority for overlapping entities
+	// TODO: don't draw entities out of bounds
 	const int offset = 2;
 	std::vector<std::shared_ptr<GameEntity>> entities = gameState.getAllEntities();
 	for(std::shared_ptr<GameEntity> entity : entities)

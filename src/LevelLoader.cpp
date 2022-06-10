@@ -120,6 +120,11 @@ bool LevelLoader::createEntityFromSymbol(char symbol, int x, int y)
 	{
 		case 'p':
 		{
+			if(this->playerEntity != nullptr)
+			{
+				std::cerr << "ERR: More than one player entity" << std::endl;
+				return false;
+			}
 			Player player('p', {x, y}, this->playerSpeedLevel);
 			this->playerEntity = std::make_shared<Player> (player); 
 			break;
@@ -136,7 +141,7 @@ bool LevelLoader::createEntityFromSymbol(char symbol, int x, int y)
 		}
 		default:
 		{
-			std::cerr << "Unknow symbol: '" << symbol << std::endl;
+			std::cerr << "ERR: Unknow symbol: '" << symbol << std::endl;
 			return false;
 		}
 	}
@@ -158,7 +163,7 @@ bool LevelLoader::loadEntities()
 	if(this->playerEntity == nullptr)
 	{
 
-		std::cerr << "Missing player entity";
+		std::cerr << "ERR: Missing player entity" << std::endl;
 		return false;
 	}
 	return true;
