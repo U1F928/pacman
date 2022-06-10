@@ -38,7 +38,6 @@ void Game::start()
 }
 void Game::mainLoop()
 {
-	// TODO: refactor the two while loops
 	int deltaTime = 0;
 	while(true)
 	{
@@ -48,20 +47,13 @@ void Game::mainLoop()
 			this->renderer.endNcurses();
 			return;
 		}
-		deltaTime += this->getElapsedMicroseconds();
-		while(deltaTime > this->microsecondsPerFrame)
+		if(this->currentGameState.playerLost() || this->currentGameState.playerWon())
 		{
-			if(this->currentGameState.playerLost() || this->currentGameState.playerWon())
-			{
-				break;
-			}
-			this->currentGameState.setSpeedLevel(currentGameState.getSpeedLevel() - 1);
-			startLog();
-			this->currentGameState = this->currentGameState.update();
-			deltaTime -= this->microsecondsPerFrame ;
+			// waiting for user to quit game
+			continue;
 		}
+		this->updateGameStateByDeltaTime(deltaTime);
 		this->renderer.renderGameState(this->currentGameState);
-		//this->drawGameState(this->currentGameState);
 	}
 }
 int Game::getElapsedMicroseconds()
@@ -84,5 +76,16 @@ void Game::handleUserInput()
 	if(validGameStateInput.find(userInput) != validGameStateInput.end())
 	{
 		this->currentGameState.insertUserInput(userInput);
+	}
+}
+
+void Game::updateGameStateByDeltaTime(int& deltaTime)
+{
+	deltaTime += this->getElapsedMicroseconds();
+	while(deltaTime > this->microsecondsPerFrame)
+	{
+		this->currentGameState.setSpeedLevel(currentGameState.getSpeedLevel() - 1);
+		this->currentGameState = this->currentGameState.update();
+		deltaTime -= this->microsecondsPerFrame ;
 	}
 }

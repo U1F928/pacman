@@ -15,9 +15,8 @@ private:
 	GameState currentGameState;
 
 	bool loadLevel();
-	void setUpNcurses();
-	void endNcurses();
 	void mainLoop();
 	int getElapsedMicroseconds();
 	void handleUserInput();
+	void updateGameStateByDeltaTime(int& deltaTime);
 };
