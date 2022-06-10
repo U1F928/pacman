@@ -10,15 +10,16 @@ public:
 	void loadIntoGameState(GameState& gameState);
 private:
 	bool loadFile(std::string pathToFile);
-	bool loadRequiredScore();
-	bool loadPlayerSpeedLevel();
-	bool loadGhostSpeedLevel();
+	bool loadParameters();
+	bool createEntityFromSymbol(char symbol, int x, int y);
 	bool loadEntities();
 	std::vector<std::string> fileLines;
+	const unsigned int parameterCount = 4;
 	int requiredScore;
 	int playerSpeedLevel;
 	int ghostSpeedLevel;
-	std::shared_ptr<Player> playerEntity;
+	int maxSpeedLevel;
+	std::shared_ptr<Player> playerEntity = nullptr;
 	std::vector<std::shared_ptr<GameEntity>> entities; // not including playerEntity
 };
 
