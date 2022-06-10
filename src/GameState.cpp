@@ -139,10 +139,11 @@ GameState GameState::update() const
 {
 
 	GameState updatedGameState = (*this);	
+	if(updatedGameState.playerWon() || updatedGameState.playerLost())
+	{
+		return updatedGameState;
+	}
 	updatedGameState.entities.clear();
-	//updatedGameState.requiredScore = this->requiredScore;
-	//updatedGameState.speedLevel = this->speedLevel;
-	//updatedGameState.userInput = this->userInput;
 	updatedGameState.playerEntity = this->playerEntity->updatePlayer(*this);
 	updatedGameState.insertEntity(updatedGameState.playerEntity);
 	for(std::shared_ptr<GameEntity> entity : this->entities)
@@ -152,7 +153,7 @@ GameState GameState::update() const
 			std::shared_ptr<GameEntity> updatedEntity = entity->update(*this);
 			if(updatedEntity != nullptr)
 			{
-				updatedGameState.insertEntity(entity->update(*this));
+				updatedGameState.insertEntity(updatedEntity);
 			}
 		}
 	}
