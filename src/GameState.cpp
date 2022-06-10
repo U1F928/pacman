@@ -102,12 +102,12 @@ int GameState::getPlayerLifeCount() const
 	return this->playerEntity->getLifeCount();
 }
 
-bool GameState::playerLost()
+bool GameState::playerLost() const
 {
 	return this->getPlayerLifeCount() < 0;
 }
 
-bool GameState::playerWon()
+bool GameState::playerWon() const
 {
 	return this->getPlayerScore() >= this->requiredScore;
 }

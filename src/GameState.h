@@ -23,8 +23,8 @@ public:
 	int getPlayerScore() const;
 	int getPlayerLifeCount() const;
 	int getRequiredScore() const;
-	bool playerLost();
-	bool playerWon();
+	bool playerLost() const;
+	bool playerWon() const;
 
 	std::vector<std::shared_ptr<GameEntity>> getEntitiesByPosition(std::pair<int, int> position) const;
 	std::vector<std::shared_ptr<GameEntity>> getAllEntities() const;

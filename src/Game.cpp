@@ -39,6 +39,7 @@ void Game::start()
 }
 void Game::mainLoop()
 {
+	// TODO: refactor the two while loops
 	int deltaTime = 0;
 	while(true)
 	{
@@ -51,6 +52,10 @@ void Game::mainLoop()
 		deltaTime += this->getElapsedMicroseconds();
 		while(deltaTime > this->microsecondsPerFrame)
 		{
+			if(this->currentGameState.playerLost() || this->currentGameState.playerWon())
+			{
+				break;
+			}
 			this->currentGameState.setSpeedLevel(currentGameState.getSpeedLevel() - 1);
 			startLog();
 			this->currentGameState = this->currentGameState.update();
@@ -126,5 +131,19 @@ void Game::drawGameInfo(const GameState& gameState)
 	printw(" | LIFE COUNT: ");
 	std::string lifeCount = std::to_string(gameState.getPlayerLifeCount());
 	printw(lifeCount.c_str());
+	printw(" | GAME STATE: ");
+	if(gameState.playerLost())
+	{
+		printw("LOSS");
+	}
+	else if(gameState.playerWon())
+	{
+		printw("WIN");
+	}
+	else
+	{
+		printw("ONGOING");
+	}
+	
 }
 
