@@ -1,6 +1,7 @@
 #include  <string>
 #include <chrono>
 #include "GameState.h"
+#include "Renderer.h"
 // hello
 class Game
 {
@@ -10,6 +11,7 @@ private:
 	bool quitGame;
 	const int microsecondsPerFrame = 200000;
 	std::chrono::steady_clock::time_point time; 
+	Renderer renderer;
 	GameState currentGameState;
 
 	bool loadLevel();
@@ -18,7 +20,4 @@ private:
 	void mainLoop();
 	int getElapsedMicroseconds();
 	void handleUserInput();
-	void drawGameState(const GameState& gameState);
-	void drawEntities(const GameState& gameState);
-	void drawGameInfo(const GameState& gameState);
 };

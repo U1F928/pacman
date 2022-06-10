@@ -7,14 +7,14 @@
 #include <set>
 #include <fstream>
 #include <string>
-#include <ncurses.h>
 #include "Game.h"
 #include "LevelLoader.h"
+#include "Renderer.h"
 #include "GameState.h"
 #include "GameEntities/Player/Player.h"
 #include "GameEntities/Coin/Coin.h"
+#include "ncurses.h"
 
-#include <iostream>
 bool Game::loadLevel()
 {
 	LevelLoader levelLoader;
@@ -31,9 +31,8 @@ void Game::start()
 	{
 		return;
 	}
-	startLog();
 	this->time = std::chrono::steady_clock::now();
-	this->setUpNcurses();
+	this->renderer.setUpNcurses();
 	this->quitGame = false;
 	this->mainLoop();
 }
@@ -46,7 +45,7 @@ void Game::mainLoop()
 		this->handleUserInput();
 		if(this->quitGame)
 		{
-			this->endNcurses();
+			this->renderer.endNcurses();
 			return;
 		}
 		deltaTime += this->getElapsedMicroseconds();
@@ -61,15 +60,9 @@ void Game::mainLoop()
 			this->currentGameState = this->currentGameState.update();
 			deltaTime -= this->microsecondsPerFrame ;
 		}
-		this->drawGameState(this->currentGameState);
+		this->renderer.renderGameState(this->currentGameState);
+		//this->drawGameState(this->currentGameState);
 	}
-}
-void Game::setUpNcurses()
-{
-    initscr();                 
-    nodelay(stdscr, true);
-    curs_set(0);
-    noecho();
 }
 int Game::getElapsedMicroseconds()
 {
@@ -93,57 +86,3 @@ void Game::handleUserInput()
 		this->currentGameState.insertUserInput(userInput);
 	}
 }
-void Game::endNcurses()
-{
-	endwin();
-}
-
-void Game::drawGameState(const GameState& gameState)
-{
-    erase();
-	this->drawGameInfo(gameState);
-	this->drawEntities(gameState);
-    refresh();
-}
-void Game::drawEntities(const GameState& gameState)
-{
-	// TODO: add priority for overlapping entities
-	// TODO: don't draw entities out of bounds
-	const int offset = 2;
-	std::vector<std::shared_ptr<GameEntity>> entities = gameState.getAllEntities();
-	for(std::shared_ptr<GameEntity> entity : entities)
-	{
-		std::pair<int, int> position = entity->getPosition();
-		move(position.first, position.second + offset);
-    	addch(entity->getSymbol()); 
-	}
-
-}
-void Game::drawGameInfo(const GameState& gameState)
-{
-	move(0, 0);
-	std::string currentScore = std::to_string(gameState.getPlayerScore());
-	std::string requiredScore = std::to_string(gameState.getRequiredScore());
-	printw("| SCORE: ");
-	printw(currentScore.c_str());
-	printw("/");
-	printw(requiredScore.c_str());
-	printw(" | LIFE COUNT: ");
-	std::string lifeCount = std::to_string(gameState.getPlayerLifeCount());
-	printw(lifeCount.c_str());
-	printw(" | GAME STATE: ");
-	if(gameState.playerLost())
-	{
-		printw("LOSS");
-	}
-	else if(gameState.playerWon())
-	{
-		printw("WIN");
-	}
-	else
-	{
-		printw("ONGOING");
-	}
-	
-}
-

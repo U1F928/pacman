@@ -20,6 +20,7 @@ kuceralb: 														\
 	src/GameEntities/Coin/CoinCanBeEaten.o                    	\
 	src/GameState.o                                           	\
 	src/LevelLoader.o                                           \
+	src/Renderer.o                                           	\
 	src/Game.o                                                	\
 	src/main.cpp                                              
 
