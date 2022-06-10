@@ -33,20 +33,32 @@ void Renderer::renderEntities(const GameState& gameState)
 		move(position.first, position.second + offset);
     	addch(entity->getSymbol()); 
 	}
-
 }
 void Renderer::renderGameInfo(const GameState& gameState)
 {
 	move(0, 0);
+	this->renderScore(gameState);
+	this->renderLifeCount(gameState);
+	this->renderGameStateSummary(gameState);
+}
+void Renderer::renderScore(const GameState& gameState)
+{
 	std::string currentScore = std::to_string(gameState.getPlayerScore());
 	std::string requiredScore = std::to_string(gameState.getRequiredScore());
 	printw("| SCORE: ");
 	printw(currentScore.c_str());
 	printw("/");
 	printw(requiredScore.c_str());
+
+}
+void Renderer::renderLifeCount(const GameState& gameState)
+{
 	printw(" | LIFE COUNT: ");
 	std::string lifeCount = std::to_string(gameState.getPlayerLifeCount());
 	printw(lifeCount.c_str());
+}
+void Renderer::renderGameStateSummary(const GameState& gameState)
+{
 	printw(" | GAME STATE: ");
 	if(gameState.playerLost())
 	{
@@ -61,4 +73,3 @@ void Renderer::renderGameInfo(const GameState& gameState)
 		printw("ONGOING");
 	}
 }
-
