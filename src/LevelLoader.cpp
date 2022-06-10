@@ -1,6 +1,7 @@
 #include <memory>
 #include <vector>
 #include <fstream>
+#include <iostream>
 #include <string>
 #include <sstream>
 #include <optional>
@@ -14,10 +15,36 @@
 	#include "Logger.h"
 #endif
 
-bool LevelLoader::loadFromFile(std::string pathToFile)
+bool LevelLoader::getPathToFileFromUser()
 {
-	startLog();
-	if(!this->loadFile(pathToFile))
+	std::cout << "Input path to file containing the desired game level:" << std::endl;
+	while(true)
+	{
+		std::string pathToFile;
+		std::cin >> pathToFile;
+		if(!std::cin.good())
+		{
+			return false;
+		}
+		std::ifstream fileStream(pathToFile);
+		if(fileStream.good())
+		{
+			this->pathToFile = pathToFile;
+			return true;
+		}
+		else
+		{
+			std::cout << "Given path does not lead to readable file, try again:" << std::endl; 
+		}
+	}
+}
+bool LevelLoader::loadFromFile()
+{
+	if(!this->getPathToFileFromUser())
+	{
+		return false;
+	}
+	if(!this->loadFile(this->pathToFile))
 	{
 		return false;
 	}
@@ -34,9 +61,10 @@ bool LevelLoader::loadFromFile(std::string pathToFile)
 void LevelLoader::loadIntoGameState(GameState& gameState)
 {
 	gameState.insertRequiredScoreToWin(this->requiredScore);
+
+	startLog();
 	gameState.setMaxSpeedLevel(this->maxSpeedLevel);
 	gameState.insertUserInput(0);
-	startLog();
 	gameState.insertPlayer(this->playerEntity);
 	for(std::shared_ptr<GameEntity> entity : this->entities)
 	{
@@ -92,9 +120,7 @@ bool LevelLoader::createEntityFromSymbol(char symbol, int x, int y)
 	{
 		case 'p':
 		{
-			//Player player('p', {x, y}, this->playerSpeedLevel);
-			startLog();
-			Player player('p', {10, 0}, this->playerSpeedLevel);
+			Player player('p', {x, y}, this->playerSpeedLevel);
 			this->playerEntity = std::make_shared<Player> (player); 
 			break;
 		}
@@ -110,7 +136,7 @@ bool LevelLoader::createEntityFromSymbol(char symbol, int x, int y)
 		}
 		default:
 		{
-			startLog();
+			std::cerr << "Unknow symbol: '" << symbol << std::endl;
 			return false;
 		}
 	}
@@ -122,7 +148,6 @@ bool LevelLoader::loadEntities()
 	{
 		for(size_t y = 0; y < this->fileLines[x].size(); y++)
 		{
-			startLog();
 			char symbol = this->fileLines[x][y];
 			if(!this->createEntityFromSymbol(symbol, x, y))
 			{
@@ -132,6 +157,8 @@ bool LevelLoader::loadEntities()
 	}
 	if(this->playerEntity == nullptr)
 	{
+
+		std::cerr << "Missing player entity";
 		return false;
 	}
 	return true;

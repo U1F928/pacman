@@ -5,11 +5,11 @@
 class Game
 {
 public:
-	bool loadMapFromFile(std::string pathToFile);
 	void start();
 private:
-	void mainLoop();
+	bool loadLevel();
 	void setUpNcurses();
+	void mainLoop();
 	int getElapsedMicroseconds();
 	void handleUserInput();
 	void drawGameState(const GameState& gameState);

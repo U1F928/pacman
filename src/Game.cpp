@@ -15,35 +15,23 @@
 #include "GameEntities/Coin/Coin.h"
 
 #include <iostream>
-bool Game::loadMapFromFile(std::string pathToFile)
+bool Game::loadLevel()
 {
-	// TODO load from file
 	LevelLoader levelLoader;
-	if(!levelLoader.loadFromFile(std::string(pathToFile)))
+	if(!levelLoader.loadFromFile())
 	{
-		startLog();
-		log("failed load from file");
 		return false;
 	}
 	levelLoader.loadIntoGameState(this->currentGameState);
-	//this->currentGameState.setMaxSpeedLevel(10);
-	//this->currentGameState.insertUserInput(0);
-	//this->currentGameState.insertRequiredScoreToWin(3);
-	//this->currentGameState.insertEntity(std::make_shared<Coin>(Coin('O', {5, 5})));
-	//this->currentGameState.insertEntity(std::make_shared<Coin>(Coin('O', {15, 15})));
-	//this->currentGameState.insertEntity(std::make_shared<Coin>(Coin('O', {20, 20})));
-	//Player player('P', {10, 0}, 9, {1, 0}, 3, 0);
-	//this->currentGameState.insertPlayer(std::make_shared<Player>(player));
-
 	return true;
 }
 void Game::start()
 {
-	if(!this->loadMapFromFile("examples/gameLevel1"))
+	if(!this->loadLevel())
 	{
-		std::cout << "ERROR LOADING FILE" << std::endl;
 		return;
 	}
+	startLog();
 	this->time = std::chrono::steady_clock::now();
 	this->setUpNcurses();
 	this->mainLoop();
@@ -59,7 +47,6 @@ void Game::mainLoop()
 		{
 			this->currentGameState.setSpeedLevel(currentGameState.getSpeedLevel() - 1);
 			startLog();
-			log("speedLevel:"); log(this->currentGameState.getSpeedLevel());log("\n");
 			this->currentGameState = this->currentGameState.update();
 			deltaTime -= this->microsecondsPerFrame ;
 		}
