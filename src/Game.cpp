@@ -118,10 +118,13 @@ void Game::drawGameInfo(const GameState& gameState)
 {
 	move(0, 0);
 	std::string currentScore = std::to_string(gameState.getPlayerScore());
-	std::string requiredScore = std::to_string(gameState.getRequiredScore ());
-	printw("SCORE: ");
+	std::string requiredScore = std::to_string(gameState.getRequiredScore());
+	printw("| SCORE: ");
 	printw(currentScore.c_str());
 	printw("/");
 	printw(requiredScore.c_str());
+	printw(" | LIFE COUNT: ");
+	std::string lifeCount = std::to_string(gameState.getPlayerLifeCount());
+	printw(lifeCount.c_str());
 }
 
