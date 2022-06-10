@@ -7,9 +7,11 @@ class GameState
 {
 public:
 	GameState();
+	GameState& operator = (const GameState& gameState);
 	GameState(const GameState& gameState);
 	~GameState();
 
+	void setMaxSpeedLevel(int speedLevel);
 	void setSpeedLevel(int speedLevel);
 	int getSpeedLevel() const;
 	void insertUserInput(char userInput);
@@ -28,6 +30,7 @@ public:
 	GameState update() const;
 private:
 	int speedLevel;
+	int maxSpeedLevel;
 	int requiredScore;
 	char userInput;
 	std::shared_ptr<Player> playerEntity; 

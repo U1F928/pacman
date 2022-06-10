@@ -1,5 +1,6 @@
 #include <vector>
 #include <utility>
+#include "GameState.h"
 #include "GameEntity.h"
 #include "GameEntities/Player/Player.h"
 #include "Logger.h"
@@ -8,12 +9,16 @@ GameState::GameState()
 {
 
 }
-GameState::GameState(const GameState& gameState)
+
+GameState& GameState::operator = (const GameState& gameState)
 {
 	this->speedLevel = gameState.speedLevel;
+	this->maxSpeedLevel= gameState.maxSpeedLevel;
 	this->requiredScore = gameState.requiredScore;
 	this->userInput = gameState.userInput;
 	this->playerEntity = gameState.playerEntity->clonePlayer();
+	this->entities.clear();
+	this->entities.push_back(this->playerEntity);
 	for(std::shared_ptr<GameEntity> entity : gameState.entities)
 	{
 		if(entity != gameState.playerEntity)
@@ -21,12 +26,37 @@ GameState::GameState(const GameState& gameState)
 			this->entities.push_back(entity->clone());
 		}
 	}
+	return (*this);
 }
+
+GameState::GameState(const GameState& gameState)
+{
+	*this = gameState;
+}
+
 GameState::~GameState() = default;
+
+void GameState::setMaxSpeedLevel(int speedLevel)
+{
+	this->maxSpeedLevel = speedLevel;
+	this->speedLevel = this->maxSpeedLevel;
+}
 
 void GameState::setSpeedLevel(int speedLevel)
 {
-	this->speedLevel = speedLevel;
+
+	startLog();
+	log("given speed level:"); log(speedLevel); log("\n");
+	log("max speed level:"); log(this->maxSpeedLevel); log("\n");
+	if(speedLevel > maxSpeedLevel || speedLevel < 0)
+	{
+		this->speedLevel = this->maxSpeedLevel;
+	}
+	else
+	{
+		this->speedLevel = speedLevel;
+	}
+	log("new speed level:"); log(this->speedLevel); log("\n");
 }
 
 int GameState::getSpeedLevel() const
@@ -105,12 +135,11 @@ std::vector<std::shared_ptr<GameEntity>> GameState::getAllEntities() const
 GameState GameState::update() const
 {
 
-	GameState updatedGameState;	
-
-	updatedGameState.requiredScore = this->requiredScore;
-	updatedGameState.speedLevel = this->speedLevel;
-	updatedGameState.userInput = this->userInput;
-
+	GameState updatedGameState = (*this);	
+	updatedGameState.entities.clear();
+	//updatedGameState.requiredScore = this->requiredScore;
+	//updatedGameState.speedLevel = this->speedLevel;
+	//updatedGameState.userInput = this->userInput;
 	updatedGameState.playerEntity = this->playerEntity->updatePlayer(*this);
 	updatedGameState.insertEntity(updatedGameState.playerEntity);
 	for(std::shared_ptr<GameEntity> entity : this->entities)
