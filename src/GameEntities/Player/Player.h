@@ -5,7 +5,15 @@ class Interaction;
 class Player : public GameEntity
 {
 public:
-	Player(char symbol, std::pair<int, int> position, int speedLevel, std::pair<int, int> direction, int lifeCount, int Score);
+	Player
+	(
+		char symbol, 
+		std::pair<int, int> position, 
+		int speedLevel, 
+		std::pair<int, int> direction = {1, 0}, 
+		int lifeCount = 1, 
+		int score = 0
+	);
 
 	Player& operator = (const Player& player);
 

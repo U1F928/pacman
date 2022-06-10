@@ -8,7 +8,15 @@
 #include "PlayerCanBeEaten.h"
 #include "../../Logger.h"
 class Interaction;
-Player::Player(char symbol, std::pair<int, int> position, int speedLevel, std::pair<int, int> direction, int lifeCount, int score)
+Player::Player
+(
+	char symbol, 
+	std::pair<int, int> position, 
+	int speedLevel, 
+	std::pair<int, int> direction, 
+	int lifeCount, 
+	int score
+)
 :
 	symbol(symbol),
 	position(position),
@@ -39,7 +47,6 @@ Player::~Player() = default;
 
 char Player::getSymbol() const
 {
-	// FIX
 	return this->symbol;
 }
 
@@ -91,6 +98,7 @@ void Player::shareTileWith(const GameEntity& gameEntity)
 
 std::shared_ptr<Player> Player::clonePlayer() const
 {
+	// TODO is it leaking?
 	std::shared_ptr<Player> clonedPlayer = std::make_shared<Player>(*this);
 	return clonedPlayer;
 }
