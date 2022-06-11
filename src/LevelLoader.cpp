@@ -62,9 +62,9 @@ bool LevelLoader::loadFromFile()
 }
 void LevelLoader::loadIntoGameState(GameState& gameState)
 {
+	gameState.setHeight(this->fileLines.size());
+	gameState.setHeight(this->getMaxWidth());
 	gameState.insertRequiredScoreToWin(this->requiredScore);
-
-	startLog();
 	gameState.setMaxSpeedLevel(this->maxSpeedLevel);
 	gameState.insertUserInput(0);
 	gameState.insertPlayer(this->playerEntity);
@@ -116,6 +116,18 @@ bool LevelLoader::loadParameters()
 	return true;
 }
 
+int LevelLoader::getMaxWidth() const
+{
+	int max = 0;
+	for(std::string line : this->fileLines)
+	{
+		if(max < static_cast<int>(line.length()))
+		{
+			max = line.length();
+		}
+	}
+	return max;
+}
 bool LevelLoader::createEntityFromSymbol(char symbol, int x, int y)
 {
 	switch(symbol)

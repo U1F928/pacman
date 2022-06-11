@@ -10,7 +10,10 @@ public:
 	GameState& operator = (const GameState& gameState);
 	GameState(const GameState& gameState);
 	~GameState();
-
+	void setHeight(int height);
+	void setWidth(int width);
+	int getHeight() const;
+	int getWidth() const;
 	void setMaxSpeedLevel(int speedLevel);
 	void setSpeedLevel(int speedLevel);
 	int getSpeedLevel() const;
@@ -34,6 +37,8 @@ private:
 	int maxSpeedLevel;
 	int requiredScore;
 	char userInput;
+	int height;
+	int width;
 	std::shared_ptr<Player> playerEntity; 
 	std::vector<std::shared_ptr<GameEntity>> entities; // playerEntity included
 };

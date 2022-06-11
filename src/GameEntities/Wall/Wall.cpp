@@ -10,16 +10,16 @@ Wall::Wall(char symbol, std::pair<int, int> position)
 {
 }
 
-Wall& Wall::operator = (const Wall& coin)
+Wall& Wall::operator = (const Wall& wall)
 {
-	this->symbol = coin.symbol;
-	this->position= coin.position;
+	this->symbol = wall.symbol;
+	this->position= wall.position;
 	return (*this);
 }
 
-Wall::Wall(const Wall& coin)
+Wall::Wall(const Wall& wall)
 {
-	(*this) = coin;
+	(*this) = wall;
 }
 
 Wall::~Wall() = default;

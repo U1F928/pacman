@@ -24,6 +24,7 @@ private:
 	bool loadParameters();
 	bool createEntityFromSymbol(char symbol, int x, int y);
 	bool loadEntities();
+	int getMaxWidth() const;
 
 };
 

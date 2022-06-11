@@ -17,6 +17,8 @@ GameState& GameState::operator = (const GameState& gameState)
 	this->requiredScore = gameState.requiredScore;
 	this->userInput = gameState.userInput;
 	this->playerEntity = gameState.playerEntity->clonePlayer();
+	this->width = gameState.width;
+	this->height = gameState.height;
 	this->entities.clear();
 	this->entities.push_back(this->playerEntity);
 	for(std::shared_ptr<GameEntity> entity : gameState.entities)
@@ -41,13 +43,9 @@ void GameState::setMaxSpeedLevel(int speedLevel)
 	this->maxSpeedLevel = speedLevel;
 	this->speedLevel = this->maxSpeedLevel;
 }
-
 void GameState::setSpeedLevel(int speedLevel)
 {
-
 	startLog();
-	log("given speed level:"); log(speedLevel); log("\n");
-	log("max speed level:"); log(this->maxSpeedLevel); log("\n");
 	if(speedLevel > maxSpeedLevel || speedLevel < 0)
 	{
 		this->speedLevel = this->maxSpeedLevel;
@@ -56,12 +54,26 @@ void GameState::setSpeedLevel(int speedLevel)
 	{
 		this->speedLevel = speedLevel;
 	}
-	log("new speed level:"); log(this->speedLevel); log("\n");
 }
-
 int GameState::getSpeedLevel() const
 {
 	return this->speedLevel;
+}
+void GameState::setHeight(int height)
+{
+	this->height = height;
+}
+void GameState::setWidth(int width)
+{
+	this->width = width;
+}
+int GameState::getHeight() const
+{
+	return this->height;
+}
+int GameState::getWidth() const
+{
+	return this->width;
 }
 void GameState::insertUserInput(char userInput)
 {

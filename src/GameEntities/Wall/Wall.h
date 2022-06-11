@@ -7,9 +7,9 @@ class Wall : public GameEntity
 public:
 	Wall(char symbol, std::pair<int, int> position);
 
-	Wall& operator = (const Wall& coin);
+	Wall& operator = (const Wall& wall);
 
-	Wall(const Wall& coin);
+	Wall(const Wall& wall);
 
 	~Wall();
 
