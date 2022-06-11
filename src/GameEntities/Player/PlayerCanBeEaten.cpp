@@ -9,6 +9,14 @@ void PlayerCanBeEaten::interact(const Coin& coin)
 {
 	this->canBeEaten = false;
 }
+void PlayerCanBeEaten::interact(const PowerPellet& powerPellet)
+{
+	this->canBeEaten = false;
+}
+void PlayerCanBeEaten::interact(const Wall& wall)
+{
+	this->canBeEaten = false;
+}
 void PlayerCanBeEaten::interact(const Player& player)
 {
 	this->canBeEaten = false;

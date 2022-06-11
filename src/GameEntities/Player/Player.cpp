@@ -13,9 +13,10 @@ Player::Player
 	char symbol, 
 	std::pair<int, int> position, 
 	int speedLevel, 
-	std::pair<int, int> direction, 
+	std::pair<int, int> direction,
 	int lifeCount, 
-	int score
+	int score,
+	int ghostEatingTime
 )
 :
 	symbol(symbol),
@@ -23,7 +24,8 @@ Player::Player
 	speedLevel(speedLevel),
 	direction(direction),
 	lifeCount(lifeCount),
-	score(score)
+	score(score),
+	ghostEatingTime(ghostEatingTime)
 {
 }
 
@@ -123,7 +125,9 @@ std::shared_ptr<Player> Player::updatePlayer(const GameState& gameState) const
 	}
 	updatedPlayer->updateScore(gameState);
 	updatedPlayer->updatePosition(gameState);
+	updatedPlayer->updateGhostEatingTime(gameState);
 	updatedPlayer->updateDirectionByUserInput(gameState.getUserInput());
+	startLog();
 	return updatedPlayer;
 }
 
@@ -156,12 +160,14 @@ void Player::updatePosition(const GameState& gameState)
 		return;
 	}
 	int updatedPositionFirst = this->position.first + this->direction.first;
-	int updatedPositionSecond= this->position.second+ this->direction.second;
+	int updatedPositionSecond= this->position.second + this->direction.second;
 	std::pair<int, int> updatedPosition = {updatedPositionFirst, updatedPositionSecond};
 	if(this->canAccessPosition(gameState, updatedPosition))
 	{
+		startLog();
 		this->position = updatedPosition;
 	}
+
 }
 
 void Player::updateScore(const GameState& gameState)
@@ -196,7 +202,8 @@ bool Player::wasEaten(const GameState& gameState)
 
 bool Player::canAccessPosition(const GameState& gameState, std::pair<int, int> position) const
 {
-	std::vector<std::shared_ptr<GameEntity>> entitiesOnSameTile = gameState.getEntitiesByPosition(this->position);
+	std::vector<std::shared_ptr<GameEntity>> entitiesOnSameTile = gameState.getEntitiesByPosition(position);
+	startLog();
 	for(std::shared_ptr<GameEntity> entity : entitiesOnSameTile)
 	{
 		if(!this->canShareTileWith(*entity))
@@ -207,3 +214,21 @@ bool Player::canAccessPosition(const GameState& gameState, std::pair<int, int> p
 	return true;
 }
 
+int Player::getGhostEatingTime() const
+{
+	return this->ghostEatingTime;
+}
+
+void Player::setGhostEatingTime(int time)
+{
+	this->ghostEatingTime = time;
+}
+
+void Player::updateGhostEatingTime(const GameState& gameState)
+{
+	if(this->speedLevel < gameState.getSpeedLevel())
+	{
+		return;
+	}
+	this->ghostEatingTime--;
+}

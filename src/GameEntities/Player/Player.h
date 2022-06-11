@@ -12,7 +12,8 @@ public:
 		int speedLevel, 
 		std::pair<int, int> direction = {1, 0}, 
 		int lifeCount = 1, 
-		int score = 0
+		int score = 0,
+		int ghostEatingTime = 0
 	);
 
 	Player& operator = (const Player& player);
@@ -28,6 +29,10 @@ public:
 	int getScore() const;
 	
 	void setScore(int score);
+
+	int getGhostEatingTime() const;
+
+	void setGhostEatingTime(int time); 
 
 	int getLifeCount() const;
 
@@ -46,8 +51,9 @@ private:
 	int speedLevel;
 	std::pair<int, int> direction;
 	int lifeCount;
-
 	int score;
+	int ghostEatingTime;
+
 
 	bool canEat(const GameEntity& gameEntity) const;
 
@@ -65,9 +71,10 @@ private:
 
 	void updateLifeCount(const GameState& gameState);
 
+	void updateGhostEatingTime(const GameState& gameState);
+
 	bool wasEaten(const GameState& gameState);
 
 	bool canAccessPosition(const GameState& gameState, std::pair<int, int> position) const;
-
 
 };

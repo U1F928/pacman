@@ -10,6 +10,7 @@
 #include "GameEntity.h"
 #include "GameEntities/Player/Player.h"
 #include "GameEntities/Coin/Coin.h"
+#include "GameEntities/Wall/Wall.h"
 
 #ifdef LOGGING_ON
 	#include "Logger.h"
@@ -129,12 +130,19 @@ bool LevelLoader::createEntityFromSymbol(char symbol, int x, int y)
 			this->playerEntity = std::make_shared<Player> (player); 
 			break;
 		}
+		case '#':
+		{
+			std::shared_ptr<Wall> wall = std::make_shared<Wall> (Wall('#', {x, y})); 
+			this->entities.push_back(wall);
+			break;
+		}
 		case '.':
 		{
 			std::shared_ptr<Coin> coin = std::make_shared<Coin> (Coin('.', {x, y})); 
 			this->entities.push_back(coin);
 			break;
 		}
+
 		case ' ':
 		{
 			break;
