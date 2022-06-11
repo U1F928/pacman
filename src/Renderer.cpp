@@ -42,6 +42,7 @@ void Renderer::renderEntities(const GameState& gameState)
 	for(std::shared_ptr<GameEntity> entity : entities)
 	{
 		std::pair<int, int> position = entity->getPosition();
+		position.first += this->gameInfoHeight;
 		if(!this->validateEntityPosition(position))
 		{
 			continue;
@@ -119,7 +120,7 @@ bool Renderer::validateEntityPosition(std::pair<int, int> position)
 	int maxY;
 	int maxX;
 	getmaxyx(stdscr, maxY, maxX);
-	if(position.first < this->entityOffsetY || position.first >= maxY - 1)
+	if(position.first < this->gameInfoHeight || position.first >= maxY - 1)
 	{
 		return false;
 	}

@@ -212,6 +212,17 @@ bool Player::canAccessPosition(const GameState& gameState, std::pair<int, int> p
 {
 	std::vector<std::shared_ptr<GameEntity>> entitiesOnSameTile = gameState.getEntitiesByPosition(position);
 	startLog();
+	log("player pos: "); log(this->position.first); log(" "); log(this->position.second); log("\n");
+	log("width:"); log(gameState.getWidth()); log("\n");
+	log("height:"); log(gameState.getHeight()); log("\n");
+	if(position.first < 0 || position.first > gameState.getHeight())
+	{
+		return false;
+	}
+	if(position.second < 0 || position.second > gameState.getWidth())
+	{
+		return false;
+	}
 	for(std::shared_ptr<GameEntity> entity : entitiesOnSameTile)
 	{
 		if(!this->canShareTileWith(*entity))

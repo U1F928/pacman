@@ -62,8 +62,12 @@ bool LevelLoader::loadFromFile()
 }
 void LevelLoader::loadIntoGameState(GameState& gameState)
 {
+
 	gameState.setHeight(this->fileLines.size());
-	gameState.setHeight(this->getMaxWidth());
+	gameState.setWidth(this->getMaxWidth());
+	log("loaded width:"); log(gameState.getWidth()); log("\n");
+	log("loaded height:"); log(gameState.getHeight()); log("\n");
+
 	gameState.insertRequiredScoreToWin(this->requiredScore);
 	gameState.setMaxSpeedLevel(this->maxSpeedLevel);
 	gameState.insertUserInput(0);

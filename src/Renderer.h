@@ -8,7 +8,7 @@ public:
 	void endNcurses();
 	void renderGameState(const GameState& gameState);
 private:
-	int entityOffsetY = 3;
+	int gameInfoHeight = 3;
 	void renderBorders();
 	void renderEntities(const GameState& gameState);
 	void renderGameInfo(const GameState& gameState);
