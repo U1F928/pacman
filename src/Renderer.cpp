@@ -2,6 +2,8 @@
 #include "GameEntity.h"
 #include "ncurses.h"
 #include <string>
+#include <algorithm>
+
 void Renderer::setUpNcurses()
 {
     initscr();                 
@@ -22,12 +24,21 @@ void Renderer::renderGameState(const GameState& gameState)
     refresh();
 
 }
+
+bool Renderer::compare(const std::shared_ptr<GameEntity> a, const std::shared_ptr<GameEntity> b) const
+{
+	return this->getSymbolPriority(a->getSymbol()) > this->getSymbolPriority(b->getSymbol());
+}
 void Renderer::renderEntities(const GameState& gameState)
 {
-	// TODO: add priority for overlapping entities
-	// TODO: don't draw entities out of bounds
-	const int offset = 2;
 	std::vector<std::shared_ptr<GameEntity>> entities = gameState.getAllEntities();
+	std::sort
+	(
+		entities.begin(), 
+		entities.end(), 
+		[this](auto a, auto b){return this->compare(a, b);}
+	);
+	int offsetX = 1;
 	for(std::shared_ptr<GameEntity> entity : entities)
 	{
 		std::pair<int, int> position = entity->getPosition();
@@ -35,7 +46,7 @@ void Renderer::renderEntities(const GameState& gameState)
 		{
 			continue;
 		}
-		move(position.first, position.second + offset);
+		move(position.first, position.second + offsetX);
     	addch(entity->getSymbol()); 
 	}
 }
@@ -90,9 +101,17 @@ void Renderer::renderGameStateSummary(const GameState& gameState)
 	}
 }
 
-int Renderer::getSymbolPriority(char symbol)
+int Renderer::getSymbolPriority(char symbol) const
 {
-	return 1;
+	std::vector<char> symbolsOrderedByPriority = {'P', 'p', '.'};
+	for(size_t i = 0; i < symbolsOrderedByPriority.size(); i++)
+	{
+		if(symbol == symbolsOrderedByPriority[i])
+		{
+			return i;
+		}
+	}
+	return -1;
 }
 
 bool Renderer::validateEntityPosition(std::pair<int, int> position)
