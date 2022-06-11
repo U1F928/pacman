@@ -13,7 +13,8 @@ public:
 		std::pair<int, int> direction = {1, 0}, 
 		int lifeCount = 1, 
 		int score = 0,
-		int ghostEatingTime = 0
+		int ghostEatingTime = 0,
+		char ghostEatingSymbol = 'P'
 	);
 
 	Player& operator = (const Player& player);
@@ -53,6 +54,7 @@ private:
 	int lifeCount;
 	int score;
 	int ghostEatingTime;
+	char ghostEatingSymbol;
 
 
 	bool canEat(const GameEntity& gameEntity) const;

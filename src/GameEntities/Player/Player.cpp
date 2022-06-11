@@ -16,7 +16,8 @@ Player::Player
 	std::pair<int, int> direction,
 	int lifeCount, 
 	int score,
-	int ghostEatingTime
+	int ghostEatingTime,
+	char ghostEatingSymbol
 )
 :
 	symbol(symbol),
@@ -25,7 +26,8 @@ Player::Player
 	direction(direction),
 	lifeCount(lifeCount),
 	score(score),
-	ghostEatingTime(ghostEatingTime)
+	ghostEatingTime(ghostEatingTime),
+	ghostEatingSymbol(ghostEatingSymbol)
 {
 }
 
@@ -37,6 +39,8 @@ Player& Player::operator = (const Player& player)
 	this->direction = player.direction;
 	this->lifeCount = player.lifeCount;
 	this->score = player.score;
+	this->ghostEatingTime = player.ghostEatingTime;
+	this->ghostEatingSymbol = player.ghostEatingSymbol;
 	return (*this);
 }
 
@@ -49,6 +53,10 @@ Player::~Player() = default;
 
 char Player::getSymbol() const
 {
+	if(this->ghostEatingTime > 0)
+	{
+		return this->ghostEatingSymbol;
+	}
 	return this->symbol;
 }
 

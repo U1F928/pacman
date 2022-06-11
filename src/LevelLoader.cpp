@@ -11,6 +11,7 @@
 #include "GameEntities/Player/Player.h"
 #include "GameEntities/Coin/Coin.h"
 #include "GameEntities/Wall/Wall.h"
+#include "GameEntities/PowerPellet/PowerPellet.h"
 
 #ifdef LOGGING_ON
 	#include "Logger.h"
@@ -134,6 +135,12 @@ bool LevelLoader::createEntityFromSymbol(char symbol, int x, int y)
 		{
 			std::shared_ptr<Wall> wall = std::make_shared<Wall> (Wall('#', {x, y})); 
 			this->entities.push_back(wall);
+			break;
+		}
+		case '~':
+		{
+			std::shared_ptr<PowerPellet> powerPellet = std::make_shared<PowerPellet> (PowerPellet('~', {x, y})); 
+			this->entities.push_back(powerPellet);
 			break;
 		}
 		case '.':
