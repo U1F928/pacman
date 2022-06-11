@@ -17,7 +17,8 @@ Player::Player
 	int lifeCount, 
 	int score,
 	int ghostEatingTime,
-	char ghostEatingSymbol
+	char ghostEatingSymbol,
+	bool teleportFlag
 )
 :
 	symbol(symbol),
@@ -27,7 +28,8 @@ Player::Player
 	lifeCount(lifeCount),
 	score(score),
 	ghostEatingTime(ghostEatingTime),
-	ghostEatingSymbol(ghostEatingSymbol)
+	ghostEatingSymbol(ghostEatingSymbol),
+	teleportFlag(teleportFlag)
 {
 }
 
@@ -63,6 +65,18 @@ char Player::getSymbol() const
 std::pair<int, int> Player::getPosition() const
 {
 	return this->position;
+}
+
+void Player::teleportToPosition(std::pair<int, int> position)
+{
+	startLog();
+	log("Trying to teleport\n");
+	if(!this->teleportFlag)
+	{
+		log("teleporting!!!\n");
+		this->position = position;
+		this->teleportFlag = true;
+	}
 }
 
 int Player::getScore() const
@@ -131,7 +145,8 @@ std::shared_ptr<Player> Player::updatePlayer(const GameState& gameState) const
 	{
 		return nullptr;
 	}
-	updatedPlayer->updateScore(gameState);
+	updatedPlayer->interactWithEntities(gameState);
+	updatedPlayer->updateTeleportFlag(gameState);
 	updatedPlayer->updatePosition(gameState);
 	updatedPlayer->updateGhostEatingTime(gameState);
 	updatedPlayer->updateDirectionByUserInput(gameState.getUserInput());
@@ -177,14 +192,21 @@ void Player::updatePosition(const GameState& gameState)
 	}
 
 }
-
-void Player::updateScore(const GameState& gameState)
+void Player::updateTeleportFlag(const GameState& gameState)
+{
+	if(this->speedLevel < gameState.getSpeedLevel())
+	{
+		return;
+	}
+	this->teleportFlag = false;
+}
+void Player::interactWithEntities(const GameState& gameState)
 {
 	std::vector<std::shared_ptr<GameEntity>> entitiesOnSameTile = gameState.getEntitiesByPosition(this->position);
 	for(std::shared_ptr<GameEntity> entity : entitiesOnSameTile)
 	{
-		// try to eat all entities on the same tile as player
 		this->eat(*entity);
+		this->shareTileWith(*entity);
 	}
 }
 

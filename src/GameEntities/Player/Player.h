@@ -14,7 +14,8 @@ public:
 		int lifeCount = 1, 
 		int score = 0,
 		int ghostEatingTime = 0,
-		char ghostEatingSymbol = 'P'
+		char ghostEatingSymbol = 'P',
+		bool teleportFlag = false
 	);
 
 	Player& operator = (const Player& player);
@@ -37,6 +38,8 @@ public:
 
 	int getLifeCount() const;
 
+	void teleportToPosition(std::pair<int, int> position);
+
 	void acceptInteraction(Interaction& interaction) const override;
 
 	std::shared_ptr<Player> clonePlayer() const;
@@ -55,6 +58,7 @@ private:
 	int score;
 	int ghostEatingTime;
 	char ghostEatingSymbol;
+	bool teleportFlag;
 
 
 	bool canEat(const GameEntity& gameEntity) const;
@@ -69,7 +73,9 @@ private:
 
 	void updatePosition(const GameState& gameState);
 
-	void updateScore(const GameState& gameState);
+	void updateTeleportFlag(const GameState& gameState);
+
+	void interactWithEntities(const GameState& gameState);
 
 	void updateLifeCount(const GameState& gameState);
 

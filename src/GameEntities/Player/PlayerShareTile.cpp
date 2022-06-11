@@ -1,4 +1,6 @@
 #include "PlayerShareTile.h"
+#include "Player.h"
+#include "../Teleport/Teleport.h"
 PlayerShareTile::PlayerShareTile(Player& player)
 :
 	player(player)
@@ -20,7 +22,7 @@ void PlayerShareTile::interact(const Wall& wall)
 void PlayerShareTile::interact(const Teleport& teleport)
 {
 	// TODO
-	// TELEPORT PLAYER
+	this->player.teleportToPosition(teleport.getPositionOfNearestTeleport());
 }
 
 void PlayerShareTile::interact(const Player& player)

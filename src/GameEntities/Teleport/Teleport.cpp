@@ -7,10 +7,11 @@
 #include "../../Logger.h"
 #include "../../Interaction.h"
 class Interaction;
-Teleport::Teleport(char symbol, std::pair<int, int> position)
+Teleport::Teleport(char symbol, std::pair<int, int> position, std::pair<int, int> nearestTeleportPosition)
 :
 	symbol(symbol),
-	position(position)
+	position(position),
+	nearestTeleportPosition(nearestTeleportPosition)
 {
 }
 
@@ -18,6 +19,7 @@ Teleport& Teleport::operator = (const Teleport& teleport)
 {
 	this->symbol = teleport.symbol;
 	this->position= teleport.position;
+	this->nearestTeleportPosition = teleport.nearestTeleportPosition;
 	return (*this);
 }
 
@@ -52,6 +54,15 @@ std::shared_ptr<GameEntity> Teleport::clone() const
 std::shared_ptr<GameEntity> Teleport::update(const GameState& gameState) const 
 {
 	std::shared_ptr<Teleport> updatedTeleport = std::make_shared<Teleport>(*this);
+	if(updatedTeleport->nearestTeleportPosition == std::make_pair(-1, -1))
+	{
+		updatedTeleport->updatePositionOfNearestTeleport(gameState);
+		startLog();
+		log("updated nearest teleport position\n");
+		log("nearest teleport pos: "); log(updatedTeleport->nearestTeleportPosition.first); log(" "); 
+		log(updatedTeleport->nearestTeleportPosition.second); log("\n");
+		log("this teleport pos: "); log(updatedTeleport->position.first); log(" "); log(updatedTeleport->position.second); log("\n");
+	}
 	return updatedTeleport;
 }
 bool Teleport::canConnectTo(const GameEntity& gameEntity) const
@@ -72,7 +83,7 @@ bool Teleport::connectibleEntityOnPosition(const GameState& gameState, std::pair
 	}
 	return false;
 }
-std::pair<int, int> Teleport::getPositionOfNearestTeleport(const GameState& gameState) const
+void Teleport::updatePositionOfNearestTeleport(const GameState& gameState)
 {
 	std::queue<std::pair<int, int>> positions;
 	std::set<std::pair<int, int>> visitedPositions;
@@ -81,9 +92,10 @@ std::pair<int, int> Teleport::getPositionOfNearestTeleport(const GameState& game
 	{
 		std::pair<int, int> currentPosition = positions.front();	
 		positions.pop();
-		if(this->connectibleEntityOnPosition(gameState, currentPosition))
+		if(this->connectibleEntityOnPosition(gameState, currentPosition) && currentPosition != this->position)
 		{
-			return currentPosition;
+			this->nearestTeleportPosition = currentPosition;
+			return;
 		}
 		std::vector<std::pair<int, int>> neighborPositions = gameState.getNeighborPositions(currentPosition);
 		for(std::pair<int, int> neighborPosition : neighborPositions)
@@ -96,5 +108,10 @@ std::pair<int, int> Teleport::getPositionOfNearestTeleport(const GameState& game
 		}
 	}
 	// if no other teleport entity found, return it's own position
-	return this->position;
+	this->nearestTeleportPosition = this->position;
+}
+
+std::pair<int, int> Teleport::getPositionOfNearestTeleport() const
+{
+	return this->nearestTeleportPosition;
 }
