@@ -1,12 +1,12 @@
 #pragma once
 #include "../../Interaction.h"
-class PowerPelletCanBeEaten : public Interaction
+class TeleportCanConnect : public Interaction
 {
 public:
-	bool canBeEaten;
-	PowerPelletCanBeEaten();
+	bool canConnect;
+	TeleportCanConnect();
 	void interact(const Coin& coin) override;
-	void interact(const PowerPellet& coin) override;
+	void interact(const PowerPellet& powerPellet) override;
 	void interact(const Wall& wall) override;
 	void interact(const Teleport& teleport) override;
 	void interact(const Player& player) override;

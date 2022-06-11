@@ -15,8 +15,11 @@ void PlayerCanShareTile::interact(const PowerPellet& powerPellet)
 }
 void PlayerCanShareTile::interact(const Wall& wall)
 {
-	startLog();
 	this->canShare = false;
+}
+void PlayerCanShareTile::interact(const Teleport& teleport)
+{
+	this->canShare = true;
 }
 void PlayerCanShareTile::interact(const Player& player)
 {

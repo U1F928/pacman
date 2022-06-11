@@ -124,6 +124,38 @@ bool GameState::playerWon() const
 	return this->getPlayerScore() >= this->requiredScore;
 }
 
+bool GameState::validPosition(std::pair<int, int> position) const
+{
+	if(position.first < 0 || position.first > this->height)
+	{
+		return false;
+	}
+	if(position.second < 0 || position.second > this->width)
+	{
+		return false;
+	}
+	return true;
+}
+std::vector<std::pair<int, int>> GameState::getNeighborPositions(std::pair<int, int> position) const
+{
+	std::vector<std::pair<int, int>> neighborPositions;
+	std::vector<std::pair<int, int>> directions =
+	{
+		{ 0, +1},
+		{ 0, -1},
+		{+1,  0},
+		{-1,  0}
+	};
+	for(std::pair<int, int> direction : directions)
+	{
+		std::pair<int, int> neighborPosition = {position.first + direction.first, position.second + direction.second};
+		if(this->validPosition(neighborPosition))
+		{
+			neighborPositions.push_back(neighborPosition);
+		}
+	}
+	return neighborPositions;
+}
 std::vector<std::shared_ptr<GameEntity>> GameState::getEntitiesByPosition(std::pair<int, int> position) const
 {
 	std::vector<std::shared_ptr<GameEntity>> clonedEntitiesOnPosition;

@@ -8,6 +8,10 @@ void CoinCanBeEaten::interact(const Wall& wall)
 {
 	this->canBeEaten = false;
 }
+void CoinCanBeEaten::interact(const Teleport& teleport) 
+{
+	this->canBeEaten = false;
+}
 void CoinCanBeEaten::interact(const PowerPellet& powerPellet) 
 {
 	this->canBeEaten = false;

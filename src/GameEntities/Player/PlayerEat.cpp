@@ -19,6 +19,11 @@ void PlayerEat::interact(const Wall& wall)
 {
 	// do nothing
 }
+void PlayerEat::interact(const Teleport& teleport)
+{
+	// TODO
+	// change players position 
+}
 void PlayerEat::interact(const Player& player)
 {
 	// do nothing

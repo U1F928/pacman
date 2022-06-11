@@ -17,6 +17,11 @@ void PlayerShareTile::interact(const Wall& wall)
 {
 	// do nothing
 }
+void PlayerShareTile::interact(const Teleport& teleport)
+{
+	// TODO
+	// TELEPORT PLAYER
+}
 
 void PlayerShareTile::interact(const Player& player)
 {

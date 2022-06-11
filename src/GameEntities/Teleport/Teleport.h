@@ -23,8 +23,11 @@ public:
 
 	std::shared_ptr<GameEntity> update(const GameState& gameState) const override;
 
-	std::vector<std::pair<int, int>> getPositionOfNearestTeleport(const GameState& gameState) const;
+	std::pair<int, int> getPositionOfNearestTeleport(const GameState& gameState) const;
 private:
 	char symbol;
 	std::pair<int, int> position;
+
+	bool connectibleEntityOnPosition(const GameState& gameState, std::pair<int, int> position) const;
+	bool canConnectTo(const GameEntity& gameEntity) const;
 };

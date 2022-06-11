@@ -1,5 +1,6 @@
 #pragma once
 #include <memory>
+#include <utility>
 #include <vector>
 class Player;
 class GameEntity;
@@ -28,7 +29,8 @@ public:
 	int getRequiredScore() const;
 	bool playerLost() const;
 	bool playerWon() const;
-
+	bool validPosition(std::pair<int, int> position) const;
+	std::vector<std::pair<int, int>> getNeighborPositions(std::pair<int, int> position) const;
 	std::vector<std::shared_ptr<GameEntity>> getEntitiesByPosition(std::pair<int, int> position) const;
 	std::vector<std::shared_ptr<GameEntity>> getAllEntities() const;
 	GameState update() const;

@@ -12,6 +12,7 @@
 #include "GameEntities/Coin/Coin.h"
 #include "GameEntities/Wall/Wall.h"
 #include "GameEntities/PowerPellet/PowerPellet.h"
+#include "GameEntities/Teleport/Teleport.h"
 
 #ifdef LOGGING_ON
 	#include "Logger.h"
@@ -151,6 +152,12 @@ bool LevelLoader::createEntityFromSymbol(char symbol, int x, int y)
 		{
 			std::shared_ptr<Wall> wall = std::make_shared<Wall> (Wall('#', {x, y})); 
 			this->entities.push_back(wall);
+			break;
+		}
+		case '0':
+		{
+			std::shared_ptr<Teleport> teleport = std::make_shared<Teleport> (Teleport('0', {x, y})); 
+			this->entities.push_back(teleport);
 			break;
 		}
 		case '~':

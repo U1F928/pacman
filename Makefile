@@ -21,6 +21,8 @@ kuceralb: 															\
 	src/GameEntities/Wall/Wall.o                              		\
 	src/GameEntities/PowerPellet/PowerPellet.o                  	\
 	src/GameEntities/PowerPellet/PowerPelletCanBeEaten.o  			\
+	src/GameEntities/Teleport/Teleport.o  							\
+	src/GameEntities/Teleport/TeleportCanConnect.o  				\
 	src/GameState.o                                           		\
 	src/LevelLoader.o                                           	\
 	src/Renderer.o                                           		\
