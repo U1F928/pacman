@@ -17,6 +17,10 @@ void PlayerCanShareTile::interact(const Wall& wall)
 {
 	this->canShare = false;
 }
+void PlayerCanShareTile::interact(const RespawnPoint& respawnPoint)
+{
+	this->canShare = false;
+}
 void PlayerCanShareTile::interact(const Teleport& teleport)
 {
 	this->canShare = true;

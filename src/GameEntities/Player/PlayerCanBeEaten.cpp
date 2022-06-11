@@ -17,6 +17,10 @@ void PlayerCanBeEaten::interact(const Wall& wall)
 {
 	this->canBeEaten = false;
 }
+void PlayerCanBeEaten::interact(const RespawnPoint& respawnPoint)
+{
+	this->canBeEaten = false;
+}
 void PlayerCanBeEaten::interact(const Teleport& teleport)
 {
 	this->canBeEaten = false;

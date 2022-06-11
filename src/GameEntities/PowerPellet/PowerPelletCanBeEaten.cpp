@@ -8,6 +8,10 @@ void PowerPelletCanBeEaten::interact(const Wall& wall)
 {
 	this->canBeEaten = false;
 }
+void PowerPelletCanBeEaten::interact(const RespawnPoint& respawnPoint)
+{
+	this->canBeEaten = false;
+}
 void PowerPelletCanBeEaten::interact(const Teleport& teleport) 
 {
 	this->canBeEaten = false;

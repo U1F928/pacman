@@ -13,6 +13,7 @@
 #include "GameEntities/Wall/Wall.h"
 #include "GameEntities/PowerPellet/PowerPellet.h"
 #include "GameEntities/Teleport/Teleport.h"
+#include "GameEntities/RespawnPoint/RespawnPoint.h"
 
 #ifdef LOGGING_ON
 	#include "Logger.h"
@@ -152,6 +153,12 @@ bool LevelLoader::createEntityFromSymbol(char symbol, int x, int y)
 		{
 			std::shared_ptr<Wall> wall = std::make_shared<Wall> (Wall('#', {x, y})); 
 			this->entities.push_back(wall);
+			break;
+		}
+		case '!':
+		{
+			std::shared_ptr<RespawnPoint> respawnPoint = std::make_shared<RespawnPoint> (RespawnPoint('#', {x, y})); 
+			this->entities.push_back(respawnPoint);
 			break;
 		}
 		case '0':

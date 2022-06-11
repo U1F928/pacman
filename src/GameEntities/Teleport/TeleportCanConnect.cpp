@@ -16,6 +16,10 @@ void TeleportCanConnect::interact(const PowerPellet& powerPellet)
 {
 	this->canConnect = false;
 }
+void TeleportCanConnect::interact(const RespawnPoint& respawnPoint) 
+{
+	this->canConnect = false;
+}
 void TeleportCanConnect::interact(const Coin& coin) 
 {
 	this->canConnect = false;

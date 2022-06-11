@@ -3,8 +3,6 @@
 #include "Player.h"
 #include "PlayerShareTile.h"
 #include "PlayerCanShareTile.h"
-#include "PlayerEat.h"
-#include "PlayerCanEat.h"
 #include "PlayerCanBeEaten.h"
 #include "../../Logger.h"
 class Interaction;
@@ -97,19 +95,6 @@ int Player::getLifeCount() const
 void Player::acceptInteraction(Interaction& interaction) const 
 {
 	interaction.interact(*this);	
-}
-
-bool Player::canEat(const GameEntity& gameEntity) const
-{
-	PlayerCanEat playerCanEat;
-	gameEntity.acceptInteraction(playerCanEat);
-	return playerCanEat.canEat;
-}
-
-void Player::eat(const GameEntity& gameEntity) 
-{
-	PlayerEat playerEat(*this);	
-	gameEntity.acceptInteraction(playerEat);
 }
 
 bool Player::canShareTileWith(const GameEntity& gameEntity)  const
@@ -205,7 +190,6 @@ void Player::interactWithEntities(const GameState& gameState)
 	std::vector<std::shared_ptr<GameEntity>> entitiesOnSameTile = gameState.getEntitiesByPosition(this->position);
 	for(std::shared_ptr<GameEntity> entity : entitiesOnSameTile)
 	{
-		this->eat(*entity);
 		this->shareTileWith(*entity);
 	}
 }

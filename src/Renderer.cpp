@@ -104,7 +104,7 @@ void Renderer::renderGameStateSummary(const GameState& gameState)
 
 int Renderer::getSymbolPriority(char symbol) const
 {
-	std::vector<char> symbolsOrderedByPriority = {'P', 'p', '.', '0', '~'};
+	std::vector<char> symbolsOrderedByPriority = {'P', 'p', '.', '0', '~', '!'};
 	for(size_t i = 0; i < symbolsOrderedByPriority.size(); i++)
 	{
 		if(symbol == symbolsOrderedByPriority[i])

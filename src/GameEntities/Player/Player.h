@@ -60,11 +60,6 @@ private:
 	char ghostEatingSymbol;
 	bool teleportFlag;
 
-
-	bool canEat(const GameEntity& gameEntity) const;
-
-	void eat(const GameEntity& gameEntity);
-
 	bool canShareTileWith(const GameEntity& gameEntity) const;
 
 	void shareTileWith(const GameEntity& gameEntity);

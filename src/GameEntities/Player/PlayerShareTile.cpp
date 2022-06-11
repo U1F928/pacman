@@ -8,14 +8,19 @@ PlayerShareTile::PlayerShareTile(Player& player)
 }
 void PlayerShareTile::interact(const Coin& coin)
 {
-	// do nothing
+	const int coinScore = 1;
+	this->player.setScore(this->player.getScore() + coinScore);
 }
 void PlayerShareTile::interact(const PowerPellet& powerPellet)
 {
+	const int ghostEatingTimeGain= 30;
+	this->player.setGhostEatingTime(this->player.getGhostEatingTime() + ghostEatingTimeGain);
+}
+void PlayerShareTile::interact(const Wall& wall)
+{
 	// do nothing
 }
-
-void PlayerShareTile::interact(const Wall& wall)
+void PlayerShareTile::interact(const RespawnPoint& respawnPoint)
 {
 	// do nothing
 }
