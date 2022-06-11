@@ -22,6 +22,10 @@ kuceralb: 															\
 	src/GameEntities/PowerPellet/PowerPelletCanBeEaten.o  			\
 	src/GameEntities/Teleport/Teleport.o  							\
 	src/GameEntities/Teleport/TeleportCanConnect.o  				\
+	src/GameEntities/Imitator/Imitator.o  							\
+	src/GameEntities/Imitator/ImitatorCanShareTile.o          		\
+	src/GameEntities/Imitator/ImitatorShareTile.o                 	\
+	src/GameEntities/Imitator/ImitatorCanBeEaten.o                	\
 	src/GameState.o                                           		\
 	src/LevelLoader.o                                           	\
 	src/Renderer.o                                           		\

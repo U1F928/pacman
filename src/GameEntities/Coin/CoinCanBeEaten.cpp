@@ -4,27 +4,31 @@ CoinCanBeEaten::CoinCanBeEaten()
 	canBeEaten(false)
 {
 }
-void CoinCanBeEaten::interact(const Wall& wall) 
+void CoinCanBeEaten::interact(const Wall&) 
 {
 	this->canBeEaten = false;
 }
-void CoinCanBeEaten::interact(const RespawnPoint& respawnPoint) 
+void CoinCanBeEaten::interact(const RespawnPoint&) 
 {
 	this->canBeEaten = false;
 }
-void CoinCanBeEaten::interact(const Teleport& teleport) 
+void CoinCanBeEaten::interact(const Teleport&) 
 {
 	this->canBeEaten = false;
 }
-void CoinCanBeEaten::interact(const PowerPellet& powerPellet) 
+void CoinCanBeEaten::interact(const PowerPellet&) 
 {
 	this->canBeEaten = false;
 }
-void CoinCanBeEaten::interact(const Coin& coin) 
+void CoinCanBeEaten::interact(const Coin&) 
 {
 	this->canBeEaten = false;
 }
-void CoinCanBeEaten::interact(const Player& player) 
+void CoinCanBeEaten::interact(const Player&) 
 {
 	this->canBeEaten = true;
+}
+void CoinCanBeEaten::interact(const Imitator&) 
+{
+	this->canBeEaten = false;
 }

@@ -1,31 +1,37 @@
 #include "PlayerCanBeEaten.h"
+#include "Player.h"
 
-PlayerCanBeEaten::PlayerCanBeEaten()
+PlayerCanBeEaten::PlayerCanBeEaten(Player& player)
 :
+	player(player),
 	canBeEaten(false)
 {
 }
-void PlayerCanBeEaten::interact(const Coin& coin)
+void PlayerCanBeEaten::interact(const Coin&)
 {
 	this->canBeEaten = false;
 }
-void PlayerCanBeEaten::interact(const PowerPellet& powerPellet)
+void PlayerCanBeEaten::interact(const PowerPellet&)
 {
 	this->canBeEaten = false;
 }
-void PlayerCanBeEaten::interact(const Wall& wall)
+void PlayerCanBeEaten::interact(const Wall&)
 {
 	this->canBeEaten = false;
 }
-void PlayerCanBeEaten::interact(const RespawnPoint& respawnPoint)
+void PlayerCanBeEaten::interact(const RespawnPoint&)
 {
 	this->canBeEaten = false;
 }
-void PlayerCanBeEaten::interact(const Teleport& teleport)
+void PlayerCanBeEaten::interact(const Teleport&)
 {
 	this->canBeEaten = false;
 }
-void PlayerCanBeEaten::interact(const Player& player)
+void PlayerCanBeEaten::interact(const Player&)
 {
 	this->canBeEaten = false;
+}
+void PlayerCanBeEaten::interact(const Imitator&)
+{
+	this->canBeEaten = this->player.getGhostEatingTime() == 0;
 }

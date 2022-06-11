@@ -4,27 +4,31 @@ TeleportCanConnect::TeleportCanConnect()
 	canConnect(false)
 {
 }
-void TeleportCanConnect::interact(const Wall& wall) 
+void TeleportCanConnect::interact(const Wall&) 
 {
 	this->canConnect = false;
 }
-void TeleportCanConnect::interact(const Teleport& teleport) 
+void TeleportCanConnect::interact(const Teleport&) 
 {
 	this->canConnect = true;
 }
-void TeleportCanConnect::interact(const PowerPellet& powerPellet) 
+void TeleportCanConnect::interact(const PowerPellet&) 
 {
 	this->canConnect = false;
 }
-void TeleportCanConnect::interact(const RespawnPoint& respawnPoint) 
+void TeleportCanConnect::interact(const RespawnPoint&) 
 {
 	this->canConnect = false;
 }
-void TeleportCanConnect::interact(const Coin& coin) 
+void TeleportCanConnect::interact(const Coin&) 
 {
 	this->canConnect = false;
 }
-void TeleportCanConnect::interact(const Player& player) 
+void TeleportCanConnect::interact(const Player&) 
+{
+	this->canConnect = false;
+}
+void TeleportCanConnect::interact(const Imitator&) 
 {
 	this->canConnect = false;
 }

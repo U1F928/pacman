@@ -116,7 +116,7 @@ int GameState::getPlayerLifeCount() const
 
 bool GameState::playerLost() const
 {
-	return this->getPlayerLifeCount() < 0;
+	return this->getPlayerLifeCount() <= 0;
 }
 
 bool GameState::playerWon() const

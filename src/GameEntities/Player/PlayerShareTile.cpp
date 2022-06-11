@@ -26,11 +26,14 @@ void PlayerShareTile::interact(const RespawnPoint& respawnPoint)
 }
 void PlayerShareTile::interact(const Teleport& teleport)
 {
-	// TODO
 	this->player.teleportToPosition(teleport.getPositionOfNearestTeleport());
 }
 
 void PlayerShareTile::interact(const Player& player)
+{
+	// do nothing
+}
+void PlayerShareTile::interact(const Imitator& imitator)
 {
 	// do nothing
 }

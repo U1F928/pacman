@@ -14,6 +14,7 @@
 #include "GameEntities/PowerPellet/PowerPellet.h"
 #include "GameEntities/Teleport/Teleport.h"
 #include "GameEntities/RespawnPoint/RespawnPoint.h"
+#include "GameEntities/Imitator/Imitator.h"
 
 #ifdef LOGGING_ON
 	#include "Logger.h"
@@ -147,6 +148,13 @@ bool LevelLoader::createEntityFromSymbol(char symbol, int x, int y)
 			}
 			Player player('p', {x, y}, this->playerSpeedLevel);
 			this->playerEntity = std::make_shared<Player> (player); 
+			break;
+		}
+		case 'i':
+		{
+			Imitator imitator('i', {x, y}, this->ghostSpeedLevel);
+			std::shared_ptr<Imitator> imitatorEntity = std::make_shared<Imitator> (imitator); 
+			this->entities.push_back(imitatorEntity);
 			break;
 		}
 		case '#':

@@ -5,10 +5,11 @@ class TeleportCanConnect : public Interaction
 public:
 	bool canConnect;
 	TeleportCanConnect();
-	void interact(const Coin& coin) override;
-	void interact(const PowerPellet& powerPellet) override;
-	void interact(const Wall& wall) override;
-	void interact(const RespawnPoint& respawnPoint) override;
-	void interact(const Teleport& teleport) override;
-	void interact(const Player& player) override;
+	void interact(const Coin&) override;
+	void interact(const PowerPellet&) override;
+	void interact(const Wall&) override;
+	void interact(const RespawnPoint&) override;
+	void interact(const Teleport&) override;
+	void interact(const Player&) override;
+	void interact(const Imitator&) override;
 };

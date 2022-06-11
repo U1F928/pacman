@@ -126,10 +126,6 @@ std::shared_ptr<Player> Player::updatePlayer(const GameState& gameState) const
 {
 	std::shared_ptr<Player> updatedPlayer = std::make_shared<Player>(*this);
 	updatedPlayer->updateLifeCount(gameState);
-	if(updatedPlayer->lifeCount <= 0)
-	{
-		return nullptr;
-	}
 	updatedPlayer->interactWithEntities(gameState);
 	updatedPlayer->updateTeleportFlag(gameState);
 	updatedPlayer->updatePosition(gameState);
@@ -204,7 +200,7 @@ bool Player::wasEaten(const GameState& gameState)
 	std::vector<std::shared_ptr<GameEntity>> entitiesOnSameTile = gameState.getEntitiesByPosition(this->position);
 	for(std::shared_ptr<GameEntity> entity : entitiesOnSameTile)
 	{
-		PlayerCanBeEaten playerCanBeEaten;
+		PlayerCanBeEaten playerCanBeEaten(*this);
 		entity->acceptInteraction(playerCanBeEaten);
 		if(playerCanBeEaten.canBeEaten)
 		{
@@ -248,4 +244,8 @@ void Player::updateGhostEatingTime(const GameState& gameState)
 		return;
 	}
 	this->ghostEatingTime--;
+	if(this->ghostEatingTime < 0)
+	{
+		this->ghostEatingTime = 0;
+	}
 }

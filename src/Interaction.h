@@ -5,13 +5,15 @@ class Wall;
 class Teleport;
 class Player;
 class RespawnPoint;
+class Imitator;
 class Interaction
 {
 public:
-	virtual void interact(const Coin& coin) = 0;
-	virtual void interact(const PowerPellet& powerPellet) = 0;
-	virtual void interact(const Wall& wall) = 0;
-	virtual void interact(const RespawnPoint& respawnPoint) = 0;
-	virtual void interact(const Teleport& teleport) = 0;
-	virtual void interact(const Player& player) = 0;
+	virtual void interact(const Coin&) = 0;
+	virtual void interact(const PowerPellet&) = 0;
+	virtual void interact(const Wall&) = 0;
+	virtual void interact(const RespawnPoint&) = 0;
+	virtual void interact(const Teleport&) = 0;
+	virtual void interact(const Player&) = 0;
+	virtual void interact(const Imitator&) = 0;
 };

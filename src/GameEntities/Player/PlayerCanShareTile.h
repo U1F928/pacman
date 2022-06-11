@@ -5,10 +5,11 @@ class PlayerCanShareTile : public Interaction
 public:
 	bool canShare;
 	PlayerCanShareTile();
-	virtual void interact(const Coin& coin) override;
-	virtual void interact(const PowerPellet& powerPellet) override;
-	virtual void interact(const Wall& wall) override;
-	virtual void interact(const RespawnPoint& respawnPoint) override;
-	virtual void interact(const Teleport& teleport) override;
-	virtual void interact(const Player& player) override;
+	virtual void interact(const Coin&) override;
+	virtual void interact(const PowerPellet&) override;
+	virtual void interact(const Wall&) override;
+	virtual void interact(const RespawnPoint&) override;
+	virtual void interact(const Teleport&) override;
+	virtual void interact(const Player&) override;
+	virtual void interact(const Imitator&) override;
 };
