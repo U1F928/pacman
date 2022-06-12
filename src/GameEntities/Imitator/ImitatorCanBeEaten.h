@@ -1,5 +1,8 @@
 #pragma once
 #include "../../Interaction.h"
+/**
+  * @brief  Visitor class, that tells Imitator whether it can be eaten by another entity
+  */
 class ImitatorCanBeEaten : public Interaction
 {
 public:

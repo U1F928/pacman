@@ -1,5 +1,8 @@
 #pragma once
 #include "../../Interaction.h"
+/**
+  * @brief  Visitor class, that carry's out the effects of Player sharing tile with another entity
+  */
 class PlayerShareTile : public Interaction
 {
 public:

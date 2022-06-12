@@ -1,5 +1,8 @@
 #pragma once
 #include "../../Interaction.h"
+/**
+  * @brief  Visitor class, that tells Player whether it can share tile with another entity
+  */
 class PlayerCanShareTile : public Interaction
 {
 public:

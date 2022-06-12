@@ -27,9 +27,23 @@ public:
 private:
 	char symbol;
 	std::pair<int, int> position;
-	std::pair<int, int> nearestTeleportPosition;
-
+	std::pair<int, int> nearestTeleportPosition; // position of the nearest teleport (without accounting for itself)
+   /**
+     * @brief Update position of the nearest teleport
+     * @param gameState
+     */
 	void updatePositionOfNearestTeleport(const GameState& gameState);
+	 /**
+     * @brief Check whether there is a connectible entity on the given position
+     * @param gameState
+     * @param position, the given position
+     * @return true if the there is a connectible entity on the given position, false otherwise 
+	 */
 	bool connectibleEntityOnPosition(const GameState& gameState, std::pair<int, int> position) const;
+	   /**
+     * @brief Check if the given entity can connect to Teleport
+     * @param gameEntity, the given entity
+     * @return true if the the given entity can connect to Teleport, false otherwise 
+	 */
 	bool canConnectTo(const GameEntity& gameEntity) const;
 };

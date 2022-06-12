@@ -29,5 +29,8 @@ protected:
 	std::shared_ptr<GameEntity> update(const GameState& gameState) const override;
 	void updatePosition(const GameState& gameState) override;
 private:
+   /**
+     * @brief Update's Wanderer's direction to randomly chosen direction
+     */
 	void updateToRandomDirection();
 };

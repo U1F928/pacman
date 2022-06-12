@@ -16,9 +16,9 @@ public:
 	);
 
 	using Imitator::operator =;
-	Mimic& operator=(const Mimic& mimic) 
+	Mimic& operator = (const Mimic& mimic) 
 	{
-	    Imitator::operator=(mimic);
+	    Imitator::operator = (mimic);
 	    return *this;
 	}
 	Mimic(const Mimic& mimic);

@@ -1,5 +1,8 @@
 #pragma once
 #include "../../Interaction.h"
+/**
+  * @brief  Visitor class, that tells Teleport whether it can connect to another entity
+  */
 class TeleportCanConnect : public Interaction
 {
 public:

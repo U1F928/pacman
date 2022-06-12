@@ -1,5 +1,8 @@
 #pragma once
 #include "../../Interaction.h"
+/**
+  * @brief  Visitor class, that tells Imitator whether it can share a tile (position) with another entity
+  */
 class ImitatorCanShareTile : public Interaction
 {
 public:

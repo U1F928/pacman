@@ -1,5 +1,8 @@
 #pragma once
 #include "../../Interaction.h"
+/**
+  * @brief  Visitor class, that tells Coin whether it can be eaten by another entity
+  */
 class CoinCanBeEaten : public Interaction
 {
 public:

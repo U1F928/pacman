@@ -1,5 +1,8 @@
 #pragma once
 #include "../../Interaction.h"
+/**
+  * @brief  Visitor class, that tells Imitator whether it can be respawned by another entity
+  */
 class ImitatorCanBeRespawned : public Interaction
 {
 public:
