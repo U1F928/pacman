@@ -1,0 +1,5 @@
+<map id="Imitator" name="Imitator">
+<area shape="rect" id="node3" href="$classMimic.html" title="Mimic" alt="" coords="5,155,63,181"/>
+<area shape="rect" id="node4" href="$classWanderer.html" title="Wanderer" alt="" coords="87,155,165,181"/>
+<area shape="rect" id="node2" href="$classGameEntity.html" title="Class representing all game entities. " alt="" coords="34,5,125,32"/>
+</map>

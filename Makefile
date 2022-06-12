@@ -54,5 +54,4 @@ compile: $(SOURCES)
 	$(CXX) $(CXXFLAGS) -c $< -o  $@
 
 clean:
-	rm kuceralb src/*.o; rm src/GameEntities/*/*.o; rm -r doc 
-
+	rm kuceralb src/*.o; rm src/GameEntities/*/*.o; rm -r doc; 
