@@ -27,9 +27,6 @@ kuceralb: 															\
 	src/GameEntities/Imitator/ImitatorShareTile.o                 	\
 	src/GameEntities/Imitator/ImitatorCanBeEaten.o                	\
 	src/GameEntities/Wanderer/Wanderer.o  							\
-	src/GameEntities/Wanderer/WandererCanShareTile.o          		\
-	src/GameEntities/Wanderer/WandererShareTile.o                 	\
-	src/GameEntities/Wanderer/WandererCanBeEaten.o                	\
 	src/GameState.o                                           		\
 	src/LevelLoader.o                                           	\
 	src/Renderer.o                                           		\
