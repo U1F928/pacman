@@ -208,7 +208,7 @@ bool LevelLoader::createEntityFromSymbol(char symbol, int x, int y)
 		}
 		default:
 		{
-			std::cerr << "ERR: Unknow symbol: '" << symbol << std::endl;
+			std::cerr << "ERR: Unknown symbol: '" << symbol << "'" << std::endl;
 			return false;
 		}
 	}

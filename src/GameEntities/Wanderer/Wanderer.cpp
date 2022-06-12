@@ -9,9 +9,7 @@ Wanderer::Wanderer
 	std::pair<int, int> position, 
 	int speedLevel, 
 	std::pair<int, int> direction,
-	bool teleportFlag
-)
-:
+	bool teleportFlag) :
 Imitator
 (
 	symbol,
@@ -46,12 +44,13 @@ std::shared_ptr<GameEntity> Wanderer::update(const GameState& gameState) const
 	updatedWanderer->interactWithEntities(gameState);
 	updatedWanderer->updateTeleportFlag(gameState);
 	updatedWanderer->updatePosition(gameState);
-	updatedWanderer->updateDirectionByUserInput(gameState.getUserInput());
 	return updatedWanderer;
 }
 
 void Wanderer::updatePosition(const GameState& gameState)
 {
+	startLog();
+	log("updating wanderer position\n");
 	if(this->speedLevel < gameState.getSpeedLevel())
 	{
 		return;
