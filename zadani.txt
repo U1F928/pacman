@@ -45,19 +45,14 @@ Kde lze využít polymorfismus? (doporučené)
 
         '!' Respawn point, na políčko s touto entitou se snědění duchové vrátí, aby se respawnuli
 
-        '1' Teleport/Wormhole, navštívení políčka s touto entitou, teleportuje hráče na nejbližší políčko s teleportem se stejným číslem
-
+        '0' Teleport/Wormhole, navštívení políčka s touto entitou, teleportuje hráče na nejbližší políčko s teleportem se stejným číslem
         '~' Power pellet, pokud je entita na stejném políčku jako hráč, 
                 hráč získá na omezenou dobu schopnost pojídat duchy, Power pellet je odebrána 
 
         '*' Mince, pokud je entita na stejném políčku jako hráč, je zvýšeno skóre
 
-        '%' Ovoce, pokud je entita na stejném políčku jako hráč, je zvýšeno skóre, entita je spawnuta až když je snědeno 50% mincí
-
         'p'/'P' Hráč, Pacman, ovládaný hráčem, hráč mění směr, kterým se Pacman ubírá, počáteční směr je nahoru, 
                         (k ubrání života duchem dojde když je duch na stejném či sousedním políčku)
-
-        'h' Duch, kategorie (h)unter, snaží se dostat na políčko na kterém je hráč
 
         'w' Duch, kategorie (w)anderer, vybere si náhodně políčko, na toto políčko putuje bez ohledu na hráče, 
                 když na vybrané políčko doputuje, vybere si náhodně další políčko na které bude putovat
@@ -118,7 +113,7 @@ public:
 class GameEntity // <= tady je polymorfismus
 {
         shared_ptr<GameEntity> clone() = 0;
-        shared_ptr<GameEntity> futureSelf(const GameState& g)
+        shared_ptr<GameEntity> update(const GameState& g)
         {
                 shared_ptr<GameEntity> futureGameEntity = clone();
                 ... nastav vlastnosti futureGameEntity (např. pozici) na základě GameState ...
@@ -128,9 +123,9 @@ class GameEntity // <= tady je polymorfismus
 
 Budeme tedy mít třídu Game, GameState a GameEntity, (to nejsou všechny třídy)
 
-V mainLoop v Game bereme vstup hráče a vkládáme ho do GameState, zavoláme pak GameState.futureSelf(), a výsledek volání uložíme pod nextGameState. Pak nextGameState uložíme jako currentGameState, a currentGameState zobrazíme/vykreslíme uživateli. 
+V mainLoop v Game bereme vstup hráče a vkládáme ho do GameState, zavoláme pak GameState.update(), a výsledek volání uložíme pod nextGameState. Pak nextGameState uložíme jako currentGameState, a currentGameState zobrazíme/vykreslíme uživateli. 
 
-V třídě GameState máme uloženy všechny GameEntity. Všechno co je na mapě, je reprezentováno abstraktní třídou GameEntity. Třída GameEntity bude mít funkci futureSelf(const GameState& g), která na základě daného GameState vrátí svoji budoucí verzi. Budoucí verzi GameState získáme tak, že pro každou uloženou GameEntity zavoláme GameEntity.futureSelf(const GameState& g) a budoucí verze uložíme do nového GameState, který z funkce vrátíme.
+V třídě GameState máme uloženy všechny GameEntity. Všechno co je na mapě, je reprezentováno abstraktní třídou GameEntity. Třída GameEntity bude mít funkci update(const GameState& g), která na základě daného GameState vrátí svoji budoucí verzi. Budoucí verzi GameState získáme tak, že pro každou uloženou GameEntity zavoláme GameEntity.update(const GameState& g) a budoucí verze uložíme do nového GameState, který z funkce vrátíme.
 
-Polymorfismus zde snad usnadní práci se všemi herními entitami, díky jednotnému rozhraní. Pro každou entitu tedy stačí nadefinovat jak vytvořit její budoucí verzi na základě aktuálního stavu hry. Případně ještě dodefinovat logiku v GameState, pokud stav této entity přímo ovlivňuje fakt, kdy nastane konec hry (např. pro entitu hráč, když má entita <=0 životů)
+Polymorfismus zde snad usnadní práci se všemi herními entitami, díky jednotnému rozhraní. Pro každou entitu tedy stačí nadefinovat jak vytvořit její budoucí verzi na základě aktuálního stavu hry. Případně ještě dodefinovat logiku v GameState, pokud stav této entity přímo ovlivňuje fakt, kdy nastane konec hry (např. pro entitu hráč, když má entita <= 0 životů)
 
