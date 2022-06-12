@@ -1,7 +1,7 @@
 # Pacman
 Implementujte klasickou hru Pacman proti počítači.
 
-### Ovládání 
+## Ovládání 
 * Pohyb pomocí kláves h, j, k, l. Hra se ukončí klávesou Esc.
 
 ## Funkcionality
