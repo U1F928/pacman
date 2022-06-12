@@ -31,13 +31,13 @@ void PlayerCanShareTile::interact(const Player&)
 }
 void PlayerCanShareTile::interact(const Imitator&)
 {
-	this->canShare = true;
+	this->canShare = false;
 }
 void PlayerCanShareTile::interact(const Wanderer&)
 {
-	this->canShare = true;
+	this->canShare = false;
 }
 void PlayerCanShareTile::interact(const Mimic&)
 {
-	this->canShare = true;
+	this->canShare = false;
 }

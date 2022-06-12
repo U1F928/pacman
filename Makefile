@@ -7,9 +7,9 @@ CXX=g++
 CXXFLAGS=-Wall -Wfatal-errors -pedantic -std=c++17 -g -D=LOGGING_ON
 LIBS=-lncurses 
 
-SOURCES=$(wildcard *.cpp) $(wildcard /*/*.cpp) 
+LOGIN=kuceralb
 
-kuceralb: 															\
+SOURCES=\
 	src/GameEntities/Player/Player.o                  				\
 	src/GameEntities/Player/PlayerCanShareTile.o          			\
 	src/GameEntities/Player/PlayerShareTile.o                 		\
@@ -36,7 +36,17 @@ kuceralb: 															\
 	src/Game.o                                                		\
 	src/main.cpp                                              
 
-	$(LD) $^ -o $@ $(LIBS)
+run:
+	./$(LOGIN)
+
+all : compile doc
+
+doc:
+	ls # make documentation
+	
+compile: $(SOURCES)
+
+	$(LD) $^ -o $(LOGIN) $(LIBS)
 
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o  $@
