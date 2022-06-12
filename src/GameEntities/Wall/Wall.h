@@ -17,6 +17,8 @@ public:
 
 	virtual std::pair<int, int> getPosition() const override;
 
+	virtual std::pair<int, int> getDirection() const override;
+
 	void acceptInteraction(Interaction& interaction) const override;
 
 	std::shared_ptr<GameEntity> clone() const override;

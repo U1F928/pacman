@@ -34,6 +34,12 @@ std::pair<int, int> Coin::getPosition() const
 	return this->position;
 }
 
+std::pair<int, int> Coin::getDirection() const 
+{
+	return {0, 0};
+}
+
+
 void Coin::acceptInteraction(Interaction& interaction) const 
 {
 	interaction.interact(*this);	

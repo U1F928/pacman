@@ -34,6 +34,11 @@ std::pair<int, int> RespawnPoint::getPosition() const
 	return this->position;
 }
 
+std::pair<int, int> RespawnPoint::getDirection() const 
+{
+	return {0, 0};
+}
+
 void RespawnPoint::acceptInteraction(Interaction& interaction) const 
 {
 	interaction.interact(*this);	

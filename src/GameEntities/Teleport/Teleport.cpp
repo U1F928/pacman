@@ -40,6 +40,11 @@ std::pair<int, int> Teleport::getPosition() const
 	return this->position;
 }
 
+std::pair<int, int> Teleport::getDirection() const 
+{
+	return {0, 0};
+}
+
 void Teleport::acceptInteraction(Interaction& interaction) const 
 {
 	interaction.interact(*this);	

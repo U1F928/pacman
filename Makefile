@@ -4,7 +4,7 @@
 
 LD=g++
 CXX=g++
-CXXFLAGS=-Wall -Wfatal-errors -pedantic -std=c++17 -g 
+CXXFLAGS=-Wall -Wfatal-errors -pedantic -std=c++17 -g -D=LOGGING_ON
 LIBS=-lncurses 
 
 LOGIN=kuceralb

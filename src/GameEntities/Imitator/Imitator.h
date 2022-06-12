@@ -46,6 +46,8 @@ public:
 
 	std::pair<int, int> getPosition() const override;
 
+	std::pair<int, int> getDirection() const override;
+
    /**
      * @brief Try (teleportFlag) to teleport this imitator to the given position
      * @param position, the given position

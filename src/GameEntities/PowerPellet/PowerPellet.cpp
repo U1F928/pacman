@@ -34,6 +34,11 @@ std::pair<int, int> PowerPellet::getPosition() const
 	return this->position;
 }
 
+std::pair<int, int> PowerPellet::getDirection() const 
+{
+	return {0, 0};
+}
+
 void PowerPellet::acceptInteraction(Interaction& interaction) const 
 {
 	interaction.interact(*this);	

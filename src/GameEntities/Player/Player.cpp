@@ -65,6 +65,11 @@ std::pair<int, int> Player::getPosition() const
 	return this->position;
 }
 
+std::pair<int, int> Player::getDirection() const
+{
+	return this->direction;
+}
+
 void Player::teleportToPosition(std::pair<int, int> position)
 {
 	startLog();
@@ -203,6 +208,22 @@ bool Player::wasEaten(const GameState& gameState)
 		PlayerCanBeEaten playerCanBeEaten(*this);
 		entity->acceptInteraction(playerCanBeEaten);
 		if(playerCanBeEaten.canBeEaten)
+		{
+			return true;
+		}
+	}
+	std::pair<int, int> nextPosition = {this->position.first + this->direction.first, this->position.second + this->direction.second};
+	std::vector<std::shared_ptr<GameEntity>> entitiesOnNextTile = gameState.getEntitiesByPosition(nextPosition);
+	for(std::shared_ptr<GameEntity> entity : entitiesOnSameTile)
+	{
+		PlayerCanBeEaten playerCanBeEaten(*this);
+		entity->acceptInteraction(playerCanBeEaten);
+		std::pair<int, int> entityNextPosition = 
+		{
+			entity->getPosition().first + entity->getDirection().first, 
+			entity->getPosition().second + entity->getDirection().second
+		};
+		if(playerCanBeEaten.canBeEaten && this->position == entityNextPosition)
 		{
 			return true;
 		}

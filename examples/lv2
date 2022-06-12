@@ -1,11 +1,11 @@
-5   	//REQUIRED SCORE
+9   	//REQUIRED SCORE
 3 		//PLAYER SPEED
 2 		//GHOST SPEED
 3	 	//MAX SPEED LEVEL
 #######################
-#       .      .     0#
-#    .    . w     . ~ #
+#       .  w   .     0#
+#    .    .       . ~ #
 # ~    .  .    .  .   #
-#0  p   .    .   i    #
+#0      .  p .        #
 #######    !    #######
 #######################

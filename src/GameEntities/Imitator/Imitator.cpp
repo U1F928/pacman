@@ -50,6 +50,11 @@ std::pair<int, int> Imitator::getPosition() const
 {
 	return this->position;
 }
+std::pair<int, int> Imitator::getDirection() const
+{
+	return this->direction;
+}
+
 void Imitator::teleportToPosition(std::pair<int, int> position)
 {
 	startLog();
@@ -149,6 +154,22 @@ bool Imitator::wasEaten(const GameState& gameState)
 		ImitatorCanBeEaten imitatorCanBeEaten;
 		entity->acceptInteraction(imitatorCanBeEaten);
 		if(imitatorCanBeEaten.canBeEaten)
+		{
+			return true;
+		}
+	}
+	std::pair<int, int> nextPosition = {this->position.first + this->direction.first, this->position.second + this->direction.second};
+	std::vector<std::shared_ptr<GameEntity>> entitiesOnNextTile = gameState.getEntitiesByPosition(nextPosition);
+	for(std::shared_ptr<GameEntity> entity : entitiesOnSameTile)
+	{
+		ImitatorCanBeEaten imitatorCanBeEaten;
+		entity->acceptInteraction(imitatorCanBeEaten);
+		std::pair<int, int> entityNextPosition = 
+		{
+			entity->getPosition().first + entity->getDirection().first, 
+			entity->getPosition().second + entity->getDirection().second
+		};
+		if(imitatorCanBeEaten.canBeEaten && this->position == entityNextPosition)
 		{
 			return true;
 		}

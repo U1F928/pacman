@@ -34,6 +34,11 @@ std::pair<int, int> Wall::getPosition() const
 	return this->position;
 }
 
+std::pair<int, int> Wall::getDirection() const 
+{
+	return {0, 0};
+}
+
 void Wall::acceptInteraction(Interaction& interaction) const 
 {
 	interaction.interact(*this);	

@@ -22,6 +22,11 @@ public:
      * @return the position
      */
 	virtual std::pair<int, int> getPosition() const = 0;
+	/**
+     * @brief Get direction of this entity
+     * @return the position
+     */
+	virtual std::pair<int, int> getDirection() const = 0;
     /**
      * @brief Accept visitor/double dispatch
      */

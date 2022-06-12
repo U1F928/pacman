@@ -49,6 +49,8 @@ public:
 	char getSymbol() const override; 
 
 	std::pair<int, int> getPosition() const override;
+	
+	std::pair<int, int> getDirection() const override;
    /**
      * @brief Get Player's current score
      * @return current score
