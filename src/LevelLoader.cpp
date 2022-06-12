@@ -179,7 +179,7 @@ bool LevelLoader::createEntityFromSymbol(char symbol, int x, int y)
 		}
 		case '!':
 		{
-			std::shared_ptr<RespawnPoint> respawnPoint = std::make_shared<RespawnPoint> (RespawnPoint('#', {x, y})); 
+			std::shared_ptr<RespawnPoint> respawnPoint = std::make_shared<RespawnPoint> (RespawnPoint('!', {x, y})); 
 			this->entities.push_back(respawnPoint);
 			break;
 		}

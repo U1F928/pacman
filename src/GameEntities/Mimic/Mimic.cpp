@@ -38,11 +38,10 @@ std::shared_ptr<GameEntity> Mimic::clone() const
 
 std::shared_ptr<GameEntity> Mimic::update(const GameState& gameState) const
 {
-	startLog();
 	std::shared_ptr<Mimic> updatedMimic = std::make_shared<Mimic>(*this);
 	if(updatedMimic->wasEaten(gameState))
 	{
-		return nullptr;
+		updatedMimic->respawn(gameState);
 	}
 	updatedMimic->interactWithEntities(gameState);
 	updatedMimic->updateTeleportFlag(gameState);

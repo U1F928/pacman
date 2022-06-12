@@ -1,9 +1,12 @@
 #include <map>
+#include <set>
+#include <queue>
 #include "../../GameEntity.h"
 #include "Imitator.h"
 #include "ImitatorShareTile.h"
 #include "ImitatorCanShareTile.h"
 #include "ImitatorCanBeEaten.h"
+#include "ImitatorCanBeRespawned.h"
 #include "../../Logger.h"
 class Interaction;
 Imitator::Imitator
@@ -79,13 +82,10 @@ std::shared_ptr<GameEntity> Imitator::clone() const
 }
 std::shared_ptr<GameEntity> Imitator::update(const GameState& gameState) const
 {
-	startLog();
-	log("using base method\n");
-
 	std::shared_ptr<Imitator> updatedImitator = std::make_shared<Imitator>(*this);
 	if(updatedImitator->wasEaten(gameState))
 	{
-		return nullptr;
+		updatedImitator->respawn(gameState);
 	}
 	updatedImitator->interactWithEntities(gameState);
 	updatedImitator->updateTeleportFlag(gameState);
@@ -172,3 +172,48 @@ bool Imitator::canAccessPosition(const GameState& gameState, std::pair<int, int>
 	return true;
 }
 
+bool Imitator::canBeRespawnedBy(const GameEntity& gameEntity)
+{
+	ImitatorCanBeRespawned imitatorCanBeRespawned;
+	gameEntity.acceptInteraction(imitatorCanBeRespawned);
+	return imitatorCanBeRespawned.canBeRespawned;
+}
+
+bool Imitator::canBeRespawnedOnPosition(const GameState& gameState, std::pair<int, int> position)
+{
+	std::vector<std::shared_ptr<GameEntity>> entities = gameState.getEntitiesByPosition(position);
+	for(std::shared_ptr<GameEntity> entity : entities)
+	{
+		if(this->canBeRespawnedBy(*entity))
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+void Imitator::respawn(const GameState& gameState)
+{
+	std::queue<std::pair<int, int>> positions;
+	std::set<std::pair<int, int>> visitedPositions;
+	positions.push(this->position);
+	while(!positions.empty())
+	{
+		std::pair<int, int> currentPosition = positions.front();	
+		positions.pop();
+		if(this->canBeRespawnedOnPosition(gameState, currentPosition)) 
+		{
+			this->position= currentPosition;
+			return;
+		}
+		std::vector<std::pair<int, int>> neighborPositions = gameState.getNeighborPositions(currentPosition);
+		for(std::pair<int, int> neighborPosition : neighborPositions)
+		{
+			if(visitedPositions.find(neighborPosition) == visitedPositions.end())
+			{
+				positions.push(neighborPosition);
+				visitedPositions.insert(neighborPosition);
+			}
+		}
+	}
+}

@@ -35,11 +35,10 @@ std::shared_ptr<GameEntity> Wanderer::clone() const
 
 std::shared_ptr<GameEntity> Wanderer::update(const GameState& gameState) const
 {
-	startLog();
 	std::shared_ptr<Wanderer> updatedWanderer = std::make_shared<Wanderer>(*this);
 	if(updatedWanderer->wasEaten(gameState))
 	{
-		return nullptr;
+		updatedWanderer->respawn(gameState);
 	}
 	updatedWanderer->interactWithEntities(gameState);
 	updatedWanderer->updateTeleportFlag(gameState);

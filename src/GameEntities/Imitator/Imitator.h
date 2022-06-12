@@ -48,6 +48,12 @@ protected:
 
 	void updateTeleportFlag(const GameState& gameState);
 
+	void respawn(const GameState& gameState);
+	
+	bool canBeRespawnedBy(const GameEntity& gameEntity);
+
+	bool canBeRespawnedOnPosition(const GameState& gameState, std::pair<int, int> position);
+
 	void interactWithEntities(const GameState& gameState);
 
 	bool wasEaten(const GameState& gameState);

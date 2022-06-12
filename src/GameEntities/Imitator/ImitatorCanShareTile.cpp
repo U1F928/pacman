@@ -19,7 +19,7 @@ void ImitatorCanShareTile::interact(const Wall&)
 }
 void ImitatorCanShareTile::interact(const RespawnPoint&)
 {
-	this->canShare = false;
+	this->canShare = true;
 }
 void ImitatorCanShareTile::interact(const Teleport&)
 {
