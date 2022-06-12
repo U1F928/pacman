@@ -4,10 +4,11 @@
 
 LD=g++
 CXX=g++
-CXXFLAGS=-Wall -Wfatal-errors -pedantic -std=c++17 -g -D=LOGGING_ON
+CXXFLAGS=-Wall -Wfatal-errors -pedantic -std=c++17 -g 
 LIBS=-lncurses 
 
 LOGIN=kuceralb
+DOXYFILE=Doxyfile
 
 SOURCES=\
 	src/GameEntities/Player/Player.o                  				\
@@ -42,7 +43,8 @@ run:
 all : compile doc
 
 doc:
-	ls # make documentation
+	doxygen $(DOXYFILE) > /dev/null
+
 	
 compile: $(SOURCES)
 
@@ -52,4 +54,5 @@ compile: $(SOURCES)
 	$(CXX) $(CXXFLAGS) -c $< -o  $@
 
 clean:
-	rm kuceralb src/*.o src/GameEntities/*/*.o
+	rm kuceralb src/*.o; rm src/GameEntities/*/*.o; rm -r doc 
+

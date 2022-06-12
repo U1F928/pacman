@@ -4,6 +4,11 @@
 #include "GameState.h"
 class GameState;
 class Interaction;
+/**
+ * @brief Class representing all game entities
+ * 
+ */
+
 class GameEntity
 {
 public:
