@@ -129,3 +129,6 @@ V třídě GameState máme uloženy všechny GameEntity. Všechno co je na mapě
 
 Polymorfismus zde snad usnadní práci se všemi herními entitami, díky jednotnému rozhraní. Pro každou entitu tedy stačí nadefinovat jak vytvořit její budoucí verzi na základě aktuálního stavu hry. Případně ještě dodefinovat logiku v GameState, pokud stav této entity přímo ovlivňuje fakt, kdy nastane konec hry (např. pro entitu hráč, když má entita <= 0 životů)
 
+### Ovládání 
+
+Pohyb pomocí kláves h,j,k,l. Hra se ukončí klávesou Esc.
