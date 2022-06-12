@@ -34,3 +34,7 @@ void ImitatorShareTile::interact(const Imitator& imitator)
 {
 	// do nothing
 }
+void ImitatorShareTile::interact(const Wanderer& wanderer)
+{
+	// do nothing
+}

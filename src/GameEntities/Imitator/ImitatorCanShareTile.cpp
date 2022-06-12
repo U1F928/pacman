@@ -33,3 +33,7 @@ void ImitatorCanShareTile::interact(const Imitator&)
 {
 	this->canShare = true;
 }
+void ImitatorCanShareTile::interact(const Wanderer&)
+{
+	this->canShare = true;
+}

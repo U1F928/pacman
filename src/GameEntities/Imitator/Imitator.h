@@ -18,7 +18,7 @@ public:
 
 	Imitator(const Imitator& imitator);
 
-	~Imitator();
+	virtual ~Imitator();
 
 	char getSymbol() const override; 
 
@@ -28,10 +28,10 @@ public:
 
 	void acceptInteraction(Interaction& interaction) const override;
 
-	std::shared_ptr<GameEntity> clone() const override;
+	virtual std::shared_ptr<GameEntity> clone() const override;
 
-	std::shared_ptr<GameEntity> update(const GameState& gameState) const override;
-private:
+	virtual std::shared_ptr<GameEntity> update(const GameState& gameState) const override;
+protected:
 	char symbol;
 	std::pair<int, int> position;
 	int speedLevel;
@@ -44,7 +44,7 @@ private:
 
 	bool updateDirectionByUserInput(char userInput);
 
-	void updatePosition(const GameState& gameState);
+	virtual void updatePosition(const GameState& gameState);
 
 	void updateTeleportFlag(const GameState& gameState);
 

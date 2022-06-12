@@ -1,12 +1,9 @@
 #pragma once
 #include "../../Interaction.h"
-class PlayerCanBeEaten : public Interaction
+class WandererShareTile : public Interaction
 {
 public:
-	Player& player;
-	bool canBeEaten;
-
-	PlayerCanBeEaten(Player&);
+	WandererShareTile(Wanderer&);
 	virtual void interact(const Coin&) override;
 	virtual void interact(const PowerPellet&) override;
 	virtual void interact(const Wall&) override;
@@ -15,4 +12,8 @@ public:
 	virtual void interact(const Player&) override;
 	virtual void interact(const Imitator&) override;
 	virtual void interact(const Wanderer&) override;
+private:
+	Wanderer& wanderer;
+
 };
+

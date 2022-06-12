@@ -6,6 +6,7 @@ class Teleport;
 class Player;
 class RespawnPoint;
 class Imitator;
+class Wanderer;
 class Interaction
 {
 public:
@@ -16,4 +17,5 @@ public:
 	virtual void interact(const Teleport&) = 0;
 	virtual void interact(const Player&) = 0;
 	virtual void interact(const Imitator&) = 0;
+	virtual void interact(const Wanderer&) = 0;
 };

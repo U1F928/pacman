@@ -32,3 +32,7 @@ void TeleportCanConnect::interact(const Imitator&)
 {
 	this->canConnect = false;
 }
+void TeleportCanConnect::interact(const Wanderer&) 
+{
+	this->canConnect = false;
+}

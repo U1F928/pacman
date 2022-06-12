@@ -15,6 +15,7 @@
 #include "GameEntities/Teleport/Teleport.h"
 #include "GameEntities/RespawnPoint/RespawnPoint.h"
 #include "GameEntities/Imitator/Imitator.h"
+#include "GameEntities/Wanderer/Wanderer.h"
 
 #ifdef LOGGING_ON
 	#include "Logger.h"
@@ -157,6 +158,14 @@ bool LevelLoader::createEntityFromSymbol(char symbol, int x, int y)
 			this->entities.push_back(imitatorEntity);
 			break;
 		}
+		case 'w':
+		{
+			Wanderer wanderer('w', {x, y}, this->ghostSpeedLevel);
+			std::shared_ptr<Wanderer> wandererEntity = std::make_shared<Wanderer> (wanderer); 
+			this->entities.push_back(wandererEntity);
+			break;
+		}
+
 		case '#':
 		{
 			std::shared_ptr<Wall> wall = std::make_shared<Wall> (Wall('#', {x, y})); 
