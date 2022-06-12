@@ -41,7 +41,7 @@ bool LevelLoader::getPathToFileFromUser()
 		}
 		else
 		{
-			std::cout << "Given path does not lead to readable file, try again:" << std::endl; 
+			std::cout << "Given path does not lead to a readable file, try again:" << std::endl; 
 		}
 	}
 }
