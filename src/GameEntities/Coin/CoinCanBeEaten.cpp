@@ -36,3 +36,7 @@ void CoinCanBeEaten::interact(const Wanderer&)
 {
 	this->canBeEaten = false;
 }
+void CoinCanBeEaten::interact(const Mimic&) 
+{
+	this->canBeEaten = false;
+}

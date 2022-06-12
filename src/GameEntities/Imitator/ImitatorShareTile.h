@@ -12,6 +12,7 @@ public:
 	virtual void interact(const Player&) override;
 	virtual void interact(const Imitator&) override;
 	virtual void interact(const Wanderer&) override;
+	virtual void interact(const Mimic&) override;
 private:
 	Imitator& imitator;
 

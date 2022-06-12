@@ -85,7 +85,7 @@ std::shared_ptr<GameEntity> Imitator::update(const GameState& gameState) const
 	std::shared_ptr<Imitator> updatedImitator = std::make_shared<Imitator>(*this);
 	if(updatedImitator->wasEaten(gameState))
 	{
-		return nullptr;
+		this->symbol = '+';
 	}
 	updatedImitator->interactWithEntities(gameState);
 	updatedImitator->updateTeleportFlag(gameState);

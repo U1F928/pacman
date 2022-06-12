@@ -36,3 +36,7 @@ void PowerPelletCanBeEaten::interact(const Wanderer&)
 {
 	this->canBeEaten = false;
 }
+void PowerPelletCanBeEaten::interact(const Mimic&) 
+{
+	this->canBeEaten = false;
+}

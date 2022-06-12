@@ -38,3 +38,7 @@ void ImitatorCanBeEaten::interact(const Wanderer&)
 {
 	this->canBeEaten = false;
 }
+void ImitatorCanBeEaten::interact(const Mimic&)
+{
+	this->canBeEaten = false;
+}

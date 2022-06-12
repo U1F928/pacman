@@ -39,3 +39,7 @@ void PlayerCanBeEaten::interact(const Wanderer&)
 {
 	this->canBeEaten = this->player.getGhostEatingTime() == 0;
 }
+void PlayerCanBeEaten::interact(const Mimic&)
+{
+	this->canBeEaten = this->player.getGhostEatingTime() == 0;
+}

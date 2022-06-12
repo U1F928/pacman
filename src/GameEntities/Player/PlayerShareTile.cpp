@@ -41,3 +41,7 @@ void PlayerShareTile::interact(const Wanderer& wanderer)
 {
 	// do nothing
 }
+void PlayerShareTile::interact(const Mimic& mimic)
+{
+	// do nothing
+}

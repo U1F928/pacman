@@ -13,4 +13,5 @@ public:
 	void interact(const Player&) override;
 	void interact(const Imitator&) override;
 	void interact(const Wanderer&) override;
+	void interact(const Mimic&) override;
 };

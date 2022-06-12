@@ -16,6 +16,7 @@
 #include "GameEntities/RespawnPoint/RespawnPoint.h"
 #include "GameEntities/Imitator/Imitator.h"
 #include "GameEntities/Wanderer/Wanderer.h"
+#include "GameEntities/Mimic/Mimic.h"
 
 #ifdef LOGGING_ON
 	#include "Logger.h"
@@ -69,9 +70,6 @@ void LevelLoader::loadIntoGameState(GameState& gameState)
 
 	gameState.setHeight(this->fileLines.size());
 	gameState.setWidth(this->getMaxWidth());
-	log("loaded width:"); log(gameState.getWidth()); log("\n");
-	log("loaded height:"); log(gameState.getHeight()); log("\n");
-
 	gameState.insertRequiredScoreToWin(this->requiredScore);
 	gameState.setMaxSpeedLevel(this->maxSpeedLevel);
 	gameState.insertUserInput(0);
@@ -156,6 +154,13 @@ bool LevelLoader::createEntityFromSymbol(char symbol, int x, int y)
 			Imitator imitator('i', {x, y}, this->ghostSpeedLevel);
 			std::shared_ptr<Imitator> imitatorEntity = std::make_shared<Imitator> (imitator); 
 			this->entities.push_back(imitatorEntity);
+			break;
+		}
+		case 'm':
+		{
+			Mimic mimic('m', {x, y}, this->ghostSpeedLevel);
+			std::shared_ptr<Mimic> mimicEntity = std::make_shared<Mimic> (mimic); 
+			this->entities.push_back(mimicEntity);
 			break;
 		}
 		case 'w':

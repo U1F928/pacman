@@ -42,7 +42,7 @@ protected:
 
 	void shareTileWith(const GameEntity& gameEntity);
 
-	bool updateDirectionByUserInput(char userInput);
+	virtual bool updateDirectionByUserInput(char userInput);
 
 	virtual void updatePosition(const GameState& gameState);
 
@@ -53,5 +53,4 @@ protected:
 	bool wasEaten(const GameState& gameState);
 
 	bool canAccessPosition(const GameState& gameState, std::pair<int, int> position) const;
-
 };
