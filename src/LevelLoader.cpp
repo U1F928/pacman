@@ -181,6 +181,7 @@ bool LevelLoader::createEntityFromSymbol(char symbol, int x, int y)
 		{
 			std::shared_ptr<RespawnPoint> respawnPoint = std::make_shared<RespawnPoint> (RespawnPoint('!', {x, y})); 
 			this->entities.push_back(respawnPoint);
+			this->addedRespawnPoint = true;
 			break;
 		}
 		case '0':
@@ -229,9 +230,14 @@ bool LevelLoader::loadEntities()
 	}
 	if(this->playerEntity == nullptr)
 	{
-
-		std::cerr << "ERR: Missing player entity" << std::endl;
+		std::cerr << "ERR: Missing Player entity" << std::endl;
 		return false;
+	}
+	if(!this->addedRespawnPoint)
+	{
+		std::cerr << "ERR: Missing RespawnPoint entity" << std::endl;
+		return false;
+
 	}
 	return true;
 }

@@ -16,6 +16,7 @@ private:
 	int maxSpeedLevel;
 	const unsigned int parameterCount = 4;
 	std::shared_ptr<Player> playerEntity = nullptr;
+	bool addedRespawnPoint = false;
 	std::vector<std::string> fileLines;
 	std::vector<std::shared_ptr<GameEntity>> entities; // not including playerEntity
 
