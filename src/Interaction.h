@@ -8,9 +8,17 @@ class RespawnPoint;
 class Imitator;
 class Wanderer;
 class Mimic;
+/**
+ * @brief Abstract visitor class that's passed into GameEntity.acceptInteraction(*)
+ * 
+ */
 class Interaction
 {
 public:
+    /**
+     * @brief Interact with Coin entity via double dispatch
+	 * @param Coin, coin entity
+     */
 	virtual void interact(const Coin&) = 0;
 	virtual void interact(const PowerPellet&) = 0;
 	virtual void interact(const Wall&) = 0;

@@ -1,5 +1,0 @@
-<map id="PlayerCanBeEaten" name="PlayerCanBeEaten">
-<area shape="rect" id="node2" href="$classInteraction.html" title="Interaction" alt="" coords="5,81,88,108"/>
-<area shape="rect" id="node3" href="$classPlayer.html" title="Player" alt="" coords="112,81,171,108"/>
-<area shape="rect" id="node4" href="$classGameEntity.html" title="Class representing all game entities. " alt="" coords="96,5,187,32"/>
-</map>
