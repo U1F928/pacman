@@ -16,7 +16,7 @@ class Interaction
 {
 public:
     /**
-     * @brief Interact with Coin entity via double dispatch
+     * @brief Interact with a Coin entity via double dispatch
 	 * @param Coin, coin entity
      */
 	virtual void interact(const Coin&) = 0;
