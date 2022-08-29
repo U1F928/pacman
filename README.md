@@ -1,18 +1,40 @@
 # Pacman
-Implementace klasické hry Pacman proti počítači.
+ 
+Text based arcade game heavily inspired by Pacman.
+ 
+## Built With
+ 
+* The game is implemented in **C++** with emphasis on OOP concepts like *polymorphism* and *inheritance*.
+* The user interface is handled by the **ncurses** library.
+ 
+## Getting Started 
+ 
+### Prerequisites 
+ 
+* g++
+* ncurses
+* make
+* doxygen
+* git
+ 
+### Installation 
+ 
+Clone the project 
+``` 
+$ git clone https://github.com/U1F928/pacman
+``` 
+Go into the project directory
+``` 
+cd pacman
+```
+Build the project
+``` 
+make all
+``` 
+ 
+### Run Locally 
 
-## Ovládání 
-* Pohyb pomocí kláves h, j, k, l. Hra se ukončí klávesou Esc.
-
-## Funkcionality
-*  Dodržování základních pravidel, sbírání bonusů, míncí, třešniček, teleporty, atp.
-*  Je implementováno několik druhů AI duchů. Hra musí umět zároveň zobrazovat různé duchy s různými AI. 
-*  Zobrazování duchů s různou AI se pro přehlednost může lišit např. barvou nebo znakem.
-*  Lze načítat mapy ze souboru 
-*  Konfigurovatelná obtížnost hry ze souboru     
-*  Škálovatelná obtížnost duchů 
-
-## Využití polymorfismu
-* Abstraktní třída GameEntity pokrývající všechny herní entity
-* Abstraktní třída Interaction pokrývající všechny interakce mezi herními entitami
-
+Run the program 
+``` 
+./pacman
+``` 
