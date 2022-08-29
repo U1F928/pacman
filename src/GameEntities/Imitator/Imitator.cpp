@@ -160,7 +160,7 @@ bool Imitator::wasEaten(const GameState& gameState)
 	}
 	std::pair<int, int> nextPosition = {this->position.first + this->direction.first, this->position.second + this->direction.second};
 	std::vector<std::shared_ptr<GameEntity>> entitiesOnNextTile = gameState.getEntitiesByPosition(nextPosition);
-	for(std::shared_ptr<GameEntity> entity : entitiesOnSameTile)
+	for(std::shared_ptr<GameEntity> entity : entitiesOnNextTile)
 	{
 		ImitatorCanBeEaten imitatorCanBeEaten;
 		entity->acceptInteraction(imitatorCanBeEaten);
