@@ -15,6 +15,7 @@ Text based arcade game heavily inspired by Pacman.
 * ncurses
 * make
 * doxygen
+* graphviz
 * git
  
 ### Installation 
