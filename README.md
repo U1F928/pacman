@@ -4,7 +4,7 @@ Text based arcade game heavily inspired by Pacman.
  
 ## Built With
  
-* The game is implemented in **C++** with emphasis on OOP concepts like *polymorphism* and *inheritance*.
+* The game is implemented in **C++** with emphasis on OOP concepts like polymorphism and inheritance.
 * The user interface is handled by the **ncurses** library.
  
 ## Getting Started 
