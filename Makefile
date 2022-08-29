@@ -38,20 +38,25 @@ PACMAN_PREREQUISITES=\
        src/Renderer.o                                                  \
        src/Game.o                                                      \
        src/main.o
+
+.PHONY: run
 run:
 	./pacman
 
+.PHONY: all
 all : compile doc
 
 doc:
 	doxygen $(DOXYFILE) > /dev/null
-	
+
+.PHONY: compile
 compile: $(PACMAN_PREREQUISITES)
 	$(LD) $^ -o pacman $(LIBS)
 
 %.cpp:
 	$(CXX) $(CXXFLAGS) -c $@
 
+.PHONY: clean
 clean:
 	rm pacman src/*.o; rm src/GameEntities/*/*.o; rm -r doc; rm logFile.txt;
 
