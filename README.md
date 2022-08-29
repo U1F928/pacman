@@ -35,7 +35,7 @@ make all
  
 ### Run Locally 
 
-Run the program 
+Start the game
 ``` 
-./pacman
+make run
 ``` 
