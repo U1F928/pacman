@@ -1,10 +1,10 @@
 # Pacman
  
-Terminal based arcade game heavily inspired by Pacman.
+Terminal-based arcade game heavily inspired by Pacman, that allows players to build and play their own game levels.
  
 ## Built With
  
-* The game is implemented in **C++** with emphasis on OOP concepts like polymorphism and inheritance.
+* The game is implemented in **C++** with an emphasis on OOP concepts like polymorphism and inheritance.
 * The user interface is handled by the **ncurses** library.
  
 ## Getting Started 
