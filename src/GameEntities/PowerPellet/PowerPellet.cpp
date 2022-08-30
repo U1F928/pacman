@@ -1,75 +1,76 @@
 #include "PowerPellet.h"
 #include "../../GameEntity.h"
-#include "PowerPelletCanBeEaten.h"
 #include "../../Logger.h"
+#include "PowerPelletCanBeEaten.h"
 class Interaction;
+
 PowerPellet::PowerPellet(char symbol, std::pair<int, int> position)
-:
-	symbol(symbol),
-	position(position)
+    : symbol(symbol),
+      position(position)
 {
 }
 
-PowerPellet& PowerPellet::operator = (const PowerPellet& powerPellet)
+PowerPellet& PowerPellet::operator=(const PowerPellet& powerPellet)
 {
-	this->symbol = powerPellet.symbol;
-	this->position= powerPellet.position;
-	return (*this);
+    this->symbol = powerPellet.symbol;
+    this->position = powerPellet.position;
+    return (*this);
 }
 
 PowerPellet::PowerPellet(const PowerPellet& powerPellet)
 {
-	(*this) = powerPellet;
+    (*this) = powerPellet;
 }
 
 PowerPellet::~PowerPellet() = default;
 
-char PowerPellet::getSymbol() const 
+char PowerPellet::getSymbol() const
 {
-	return this->symbol;
+    return this->symbol;
 }
 
-std::pair<int, int> PowerPellet::getPosition() const 
+std::pair<int, int> PowerPellet::getPosition() const
 {
-	return this->position;
+    return this->position;
 }
 
-std::pair<int, int> PowerPellet::getDirection() const 
+std::pair<int, int> PowerPellet::getDirection() const
 {
-	return {0, 0};
+    return {0, 0};
 }
 
-void PowerPellet::acceptInteraction(Interaction& interaction) const 
+void PowerPellet::acceptInteraction(Interaction& interaction) const
 {
-	interaction.interact(*this);	
+    interaction.interact(*this);
 }
 
-std::shared_ptr<GameEntity> PowerPellet::clone() const 
+std::shared_ptr<GameEntity> PowerPellet::clone() const
 {
-	std::shared_ptr<PowerPellet> clonedPowerPellet = std::make_shared<PowerPellet>(*this);
-	return clonedPowerPellet;
+    std::shared_ptr<PowerPellet> clonedPowerPellet = std::make_shared<PowerPellet>(*this);
+    return clonedPowerPellet;
 }
 
-std::shared_ptr<GameEntity> PowerPellet::update(const GameState& gameState) const 
+std::shared_ptr<GameEntity> PowerPellet::update(const GameState& gameState) const
 {
-	std::shared_ptr<PowerPellet> updatedPowerPellet = std::make_shared<PowerPellet>(*this);
-	if(updatedPowerPellet->wasEaten(gameState))
-	{
-		return nullptr;
-	}
-	return updatedPowerPellet;
+    std::shared_ptr<PowerPellet> updatedPowerPellet = std::make_shared<PowerPellet>(*this);
+    if (updatedPowerPellet->wasEaten(gameState))
+    {
+        return nullptr;
+    }
+    return updatedPowerPellet;
 }
+
 bool PowerPellet::wasEaten(const GameState& gameState)
 {
-	std::vector<std::shared_ptr<GameEntity>> entitiesOnSameTile = gameState.getEntitiesByPosition(this->position);
-	for(std::shared_ptr<GameEntity> entity : entitiesOnSameTile)
-	{
-		PowerPelletCanBeEaten powerPelletCanBeEaten;
-		entity->acceptInteraction(powerPelletCanBeEaten);
-		if(powerPelletCanBeEaten.canBeEaten)
-		{
-			return true;
-		}
-	}
-	return false;
+    std::vector<std::shared_ptr<GameEntity>> entitiesOnSameTile = gameState.getEntitiesByPosition(this->position);
+    for (std::shared_ptr<GameEntity> entity : entitiesOnSameTile)
+    {
+        PowerPelletCanBeEaten powerPelletCanBeEaten;
+        entity->acceptInteraction(powerPelletCanBeEaten);
+        if (powerPelletCanBeEaten.canBeEaten)
+        {
+            return true;
+        }
+    }
+    return false;
 }

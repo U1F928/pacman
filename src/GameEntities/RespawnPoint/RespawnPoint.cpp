@@ -1,58 +1,57 @@
 #include "RespawnPoint.h"
 #include "../../GameEntity.h"
-#include "../../Logger.h"
 #include "../../Interaction.h"
+#include "../../Logger.h"
 class Interaction;
+
 RespawnPoint::RespawnPoint(char symbol, std::pair<int, int> position)
-:
-	symbol(symbol),
-	position(position)
+    : symbol(symbol),
+      position(position)
 {
 }
 
-RespawnPoint& RespawnPoint::operator = (const RespawnPoint& wall)
+RespawnPoint& RespawnPoint::operator=(const RespawnPoint& wall)
 {
-	this->symbol = wall.symbol;
-	this->position= wall.position;
-	return (*this);
+    this->symbol = wall.symbol;
+    this->position = wall.position;
+    return (*this);
 }
 
 RespawnPoint::RespawnPoint(const RespawnPoint& wall)
 {
-	(*this) = wall;
+    (*this) = wall;
 }
 
 RespawnPoint::~RespawnPoint() = default;
 
-char RespawnPoint::getSymbol() const 
+char RespawnPoint::getSymbol() const
 {
-	return this->symbol;
+    return this->symbol;
 }
 
-std::pair<int, int> RespawnPoint::getPosition() const 
+std::pair<int, int> RespawnPoint::getPosition() const
 {
-	return this->position;
+    return this->position;
 }
 
-std::pair<int, int> RespawnPoint::getDirection() const 
+std::pair<int, int> RespawnPoint::getDirection() const
 {
-	return {0, 0};
+    return {0, 0};
 }
 
-void RespawnPoint::acceptInteraction(Interaction& interaction) const 
+void RespawnPoint::acceptInteraction(Interaction& interaction) const
 {
-	interaction.interact(*this);	
+    interaction.interact(*this);
 }
 
-std::shared_ptr<GameEntity> RespawnPoint::clone() const 
+std::shared_ptr<GameEntity> RespawnPoint::clone() const
 {
-	std::shared_ptr<RespawnPoint> clonedRespawnPoint = std::make_shared<RespawnPoint>(*this);
-	return clonedRespawnPoint;
+    std::shared_ptr<RespawnPoint> clonedRespawnPoint = std::make_shared<RespawnPoint>(*this);
+    return clonedRespawnPoint;
 }
 
-std::shared_ptr<GameEntity> RespawnPoint::update(const GameState& gameState) const 
+std::shared_ptr<GameEntity> RespawnPoint::update(const GameState& gameState) const
 {
-	std::shared_ptr<RespawnPoint> updatedRespawnPoint = std::make_shared<RespawnPoint>(*this);
-	return updatedRespawnPoint;
+    std::shared_ptr<RespawnPoint> updatedRespawnPoint = std::make_shared<RespawnPoint>(*this);
+    return updatedRespawnPoint;
 }
-

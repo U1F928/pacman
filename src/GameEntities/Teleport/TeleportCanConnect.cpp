@@ -1,42 +1,51 @@
 #include "TeleportCanConnect.h"
+
 TeleportCanConnect::TeleportCanConnect()
-:
-	canConnect(false)
+    : canConnect(false)
 {
 }
-void TeleportCanConnect::interact(const Wall&) 
+
+void TeleportCanConnect::interact(const Wall&)
 {
-	this->canConnect = false;
+    this->canConnect = false;
 }
-void TeleportCanConnect::interact(const Teleport&) 
+
+void TeleportCanConnect::interact(const Teleport&)
 {
-	this->canConnect = true;
+    this->canConnect = true;
 }
-void TeleportCanConnect::interact(const PowerPellet&) 
+
+void TeleportCanConnect::interact(const PowerPellet&)
 {
-	this->canConnect = false;
+    this->canConnect = false;
 }
-void TeleportCanConnect::interact(const RespawnPoint&) 
+
+void TeleportCanConnect::interact(const RespawnPoint&)
 {
-	this->canConnect = false;
+    this->canConnect = false;
 }
-void TeleportCanConnect::interact(const Coin&) 
+
+void TeleportCanConnect::interact(const Coin&)
 {
-	this->canConnect = false;
+    this->canConnect = false;
 }
-void TeleportCanConnect::interact(const Player&) 
+
+void TeleportCanConnect::interact(const Player&)
 {
-	this->canConnect = false;
+    this->canConnect = false;
 }
-void TeleportCanConnect::interact(const Imitator&) 
+
+void TeleportCanConnect::interact(const Imitator&)
 {
-	this->canConnect = false;
+    this->canConnect = false;
 }
-void TeleportCanConnect::interact(const Wanderer&) 
+
+void TeleportCanConnect::interact(const Wanderer&)
 {
-	this->canConnect = false;
+    this->canConnect = false;
 }
-void TeleportCanConnect::interact(const Mimic&) 
+
+void TeleportCanConnect::interact(const Mimic&)
 {
-	this->canConnect = false;
+    this->canConnect = false;
 }

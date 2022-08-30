@@ -1,44 +1,53 @@
 #include "ImitatorShareTile.h"
-#include "Imitator.h"
 #include "../Teleport/Teleport.h"
+#include "Imitator.h"
+
 ImitatorShareTile::ImitatorShareTile(Imitator& imitator)
-:
-	imitator(imitator)
+    : imitator(imitator)
 {
 }
+
 void ImitatorShareTile::interact(const Coin& coin)
 {
-	// do nothing
+    // do nothing
 }
+
 void ImitatorShareTile::interact(const PowerPellet& powerPellet)
 {
-	// do nothing
+    // do nothing
 }
+
 void ImitatorShareTile::interact(const Wall& wall)
 {
-	// do nothing
+    // do nothing
 }
+
 void ImitatorShareTile::interact(const RespawnPoint& respawnPoint)
 {
-	// do nothing
+    // do nothing
 }
+
 void ImitatorShareTile::interact(const Teleport& teleport)
 {
-	this->imitator.teleportToPosition(teleport.getPositionOfNearestTeleport());
+    this->imitator.teleportToPosition(teleport.getPositionOfNearestTeleport());
 }
+
 void ImitatorShareTile::interact(const Player& player)
 {
-	// do nothing
+    // do nothing
 }
+
 void ImitatorShareTile::interact(const Imitator& imitator)
 {
-	// do nothing
+    // do nothing
 }
+
 void ImitatorShareTile::interact(const Wanderer& wanderer)
 {
-	// do nothing
+    // do nothing
 }
+
 void ImitatorShareTile::interact(const Mimic& mimic)
 {
-	// do nothing
+    // do nothing
 }

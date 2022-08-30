@@ -2,43 +2,51 @@
 #include "../Player/Player.h"
 
 ImitatorCanBeEaten::ImitatorCanBeEaten()
-:
-	canBeEaten(false)
+    : canBeEaten(false)
 {
 }
+
 void ImitatorCanBeEaten::interact(const Coin&)
 {
-	this->canBeEaten = false;
+    this->canBeEaten = false;
 }
+
 void ImitatorCanBeEaten::interact(const PowerPellet&)
 {
-	this->canBeEaten = false;
+    this->canBeEaten = false;
 }
+
 void ImitatorCanBeEaten::interact(const Wall&)
 {
-	this->canBeEaten = false;
+    this->canBeEaten = false;
 }
+
 void ImitatorCanBeEaten::interact(const RespawnPoint&)
 {
-	this->canBeEaten = false;
+    this->canBeEaten = false;
 }
+
 void ImitatorCanBeEaten::interact(const Teleport&)
 {
-	this->canBeEaten = false;
+    this->canBeEaten = false;
 }
+
 void ImitatorCanBeEaten::interact(const Player& player)
 {
-	this->canBeEaten = player.getGhostEatingTime() > 0;
+    this->canBeEaten = player.getGhostEatingTime() > 0;
 }
+
 void ImitatorCanBeEaten::interact(const Imitator&)
 {
-	this->canBeEaten = false;
+    this->canBeEaten = false;
 }
+
 void ImitatorCanBeEaten::interact(const Wanderer&)
 {
-	this->canBeEaten = false;
+    this->canBeEaten = false;
 }
+
 void ImitatorCanBeEaten::interact(const Mimic&)
 {
-	this->canBeEaten = false;
+    this->canBeEaten = false;
 }

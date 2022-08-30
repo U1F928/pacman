@@ -1,42 +1,51 @@
 #include "CoinCanBeEaten.h"
+
 CoinCanBeEaten::CoinCanBeEaten()
-:
-	canBeEaten(false)
+    : canBeEaten(false)
 {
 }
-void CoinCanBeEaten::interact(const Wall&) 
+
+void CoinCanBeEaten::interact(const Wall&)
 {
-	this->canBeEaten = false;
+    this->canBeEaten = false;
 }
-void CoinCanBeEaten::interact(const RespawnPoint&) 
+
+void CoinCanBeEaten::interact(const RespawnPoint&)
 {
-	this->canBeEaten = false;
+    this->canBeEaten = false;
 }
-void CoinCanBeEaten::interact(const Teleport&) 
+
+void CoinCanBeEaten::interact(const Teleport&)
 {
-	this->canBeEaten = false;
+    this->canBeEaten = false;
 }
-void CoinCanBeEaten::interact(const PowerPellet&) 
+
+void CoinCanBeEaten::interact(const PowerPellet&)
 {
-	this->canBeEaten = false;
+    this->canBeEaten = false;
 }
-void CoinCanBeEaten::interact(const Coin&) 
+
+void CoinCanBeEaten::interact(const Coin&)
 {
-	this->canBeEaten = false;
+    this->canBeEaten = false;
 }
-void CoinCanBeEaten::interact(const Player&) 
+
+void CoinCanBeEaten::interact(const Player&)
 {
-	this->canBeEaten = true;
+    this->canBeEaten = true;
 }
-void CoinCanBeEaten::interact(const Imitator&) 
+
+void CoinCanBeEaten::interact(const Imitator&)
 {
-	this->canBeEaten = false;
+    this->canBeEaten = false;
 }
-void CoinCanBeEaten::interact(const Wanderer&) 
+
+void CoinCanBeEaten::interact(const Wanderer&)
 {
-	this->canBeEaten = false;
+    this->canBeEaten = false;
 }
-void CoinCanBeEaten::interact(const Mimic&) 
+
+void CoinCanBeEaten::interact(const Mimic&)
 {
-	this->canBeEaten = false;
+    this->canBeEaten = false;
 }

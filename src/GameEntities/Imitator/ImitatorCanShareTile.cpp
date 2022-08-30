@@ -1,43 +1,52 @@
 #include "ImitatorCanShareTile.h"
 #include "../../Logger.h"
+
 ImitatorCanShareTile::ImitatorCanShareTile()
-:
-	canShare(false)
+    : canShare(false)
 {
 }
+
 void ImitatorCanShareTile::interact(const Coin&)
 {
-	this->canShare = true;
+    this->canShare = true;
 }
+
 void ImitatorCanShareTile::interact(const PowerPellet&)
 {
-	this->canShare = true;
+    this->canShare = true;
 }
+
 void ImitatorCanShareTile::interact(const Wall&)
 {
-	this->canShare = false;
+    this->canShare = false;
 }
+
 void ImitatorCanShareTile::interact(const RespawnPoint&)
 {
-	this->canShare = true;
+    this->canShare = true;
 }
+
 void ImitatorCanShareTile::interact(const Teleport&)
 {
-	this->canShare = true;
+    this->canShare = true;
 }
+
 void ImitatorCanShareTile::interact(const Player&)
 {
-	this->canShare = true;
+    this->canShare = true;
 }
+
 void ImitatorCanShareTile::interact(const Imitator&)
 {
-	this->canShare = true;
+    this->canShare = true;
 }
+
 void ImitatorCanShareTile::interact(const Wanderer&)
 {
-	this->canShare = true;
+    this->canShare = true;
 }
+
 void ImitatorCanShareTile::interact(const Mimic&)
 {
-	this->canShare = true;
+    this->canShare = true;
 }

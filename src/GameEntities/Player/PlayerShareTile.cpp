@@ -1,47 +1,55 @@
 #include "PlayerShareTile.h"
-#include "Player.h"
 #include "../Teleport/Teleport.h"
+#include "Player.h"
+
 PlayerShareTile::PlayerShareTile(Player& player)
-:
-	player(player)
+    : player(player)
 {
 }
+
 void PlayerShareTile::interact(const Coin& coin)
 {
-	const int coinScore = 1;
-	this->player.setScore(this->player.getScore() + coinScore);
+    const int coinScore = 1;
+    this->player.setScore(this->player.getScore() + coinScore);
 }
+
 void PlayerShareTile::interact(const PowerPellet& powerPellet)
 {
-	const int ghostEatingTimeGain= 30;
-	this->player.setGhostEatingTime(this->player.getGhostEatingTime() + ghostEatingTimeGain);
+    const int ghostEatingTimeGain = 30;
+    this->player.setGhostEatingTime(this->player.getGhostEatingTime() + ghostEatingTimeGain);
 }
+
 void PlayerShareTile::interact(const Wall& wall)
 {
-	// do nothing
+    // do nothing
 }
+
 void PlayerShareTile::interact(const RespawnPoint& respawnPoint)
 {
-	// do nothing
+    // do nothing
 }
+
 void PlayerShareTile::interact(const Teleport& teleport)
 {
-	this->player.teleportToPosition(teleport.getPositionOfNearestTeleport());
+    this->player.teleportToPosition(teleport.getPositionOfNearestTeleport());
 }
 
 void PlayerShareTile::interact(const Player& player)
 {
-	// do nothing
+    // do nothing
 }
+
 void PlayerShareTile::interact(const Imitator& imitator)
 {
-	// do nothing
+    // do nothing
 }
+
 void PlayerShareTile::interact(const Wanderer& wanderer)
 {
-	// do nothing
+    // do nothing
 }
+
 void PlayerShareTile::interact(const Mimic& mimic)
 {
-	// do nothing
+    // do nothing
 }

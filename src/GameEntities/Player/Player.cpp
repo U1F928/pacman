@@ -1,272 +1,261 @@
-#include <map>
-#include "../../GameEntity.h"
 #include "Player.h"
-#include "PlayerShareTile.h"
-#include "PlayerCanShareTile.h"
-#include "PlayerCanBeEaten.h"
+#include "../../GameEntity.h"
 #include "../../Logger.h"
+#include "PlayerCanBeEaten.h"
+#include "PlayerCanShareTile.h"
+#include "PlayerShareTile.h"
+#include <map>
 class Interaction;
-Player::Player
-(
-	char symbol, 
-	std::pair<int, int> position, 
-	int speedLevel, 
-	std::pair<int, int> direction,
-	int lifeCount, 
-	int score,
-	int ghostEatingTime,
-	char ghostEatingSymbol,
-	bool teleportFlag
-)
-:
-	symbol(symbol),
-	position(position),
-	speedLevel(speedLevel),
-	direction(direction),
-	lifeCount(lifeCount),
-	score(score),
-	ghostEatingTime(ghostEatingTime),
-	ghostEatingSymbol(ghostEatingSymbol),
-	teleportFlag(teleportFlag)
+
+Player::Player(char symbol,
+               std::pair<int, int> position,
+               int speedLevel,
+               std::pair<int, int> direction,
+               int lifeCount,
+               int score,
+               int ghostEatingTime,
+               char ghostEatingSymbol,
+               bool teleportFlag)
+    : symbol(symbol),
+      position(position),
+      speedLevel(speedLevel),
+      direction(direction),
+      lifeCount(lifeCount),
+      score(score),
+      ghostEatingTime(ghostEatingTime),
+      ghostEatingSymbol(ghostEatingSymbol),
+      teleportFlag(teleportFlag)
 {
 }
 
-Player& Player::operator = (const Player& player)
+Player& Player::operator=(const Player& player)
 {
-	this->symbol = player.symbol;
-	this->speedLevel= player.speedLevel;
-	this->position = player.position;
-	this->direction = player.direction;
-	this->lifeCount = player.lifeCount;
-	this->score = player.score;
-	this->ghostEatingTime = player.ghostEatingTime;
-	this->ghostEatingSymbol = player.ghostEatingSymbol;
-	return (*this);
+    this->symbol = player.symbol;
+    this->speedLevel = player.speedLevel;
+    this->position = player.position;
+    this->direction = player.direction;
+    this->lifeCount = player.lifeCount;
+    this->score = player.score;
+    this->ghostEatingTime = player.ghostEatingTime;
+    this->ghostEatingSymbol = player.ghostEatingSymbol;
+    return (*this);
 }
 
 Player::Player(const Player& player)
 {
-	(*this) = player;
+    (*this) = player;
 }
 
 Player::~Player() = default;
 
 char Player::getSymbol() const
 {
-	if(this->ghostEatingTime > 0)
-	{
-		return this->ghostEatingSymbol;
-	}
-	return this->symbol;
+    if (this->ghostEatingTime > 0)
+    {
+        return this->ghostEatingSymbol;
+    }
+    return this->symbol;
 }
 
 std::pair<int, int> Player::getPosition() const
 {
-	return this->position;
+    return this->position;
 }
 
 std::pair<int, int> Player::getDirection() const
 {
-	return this->direction;
+    return this->direction;
 }
 
 void Player::teleportToPosition(std::pair<int, int> position)
 {
-	startLog();
-	log("Trying to teleport\n");
-	if(!this->teleportFlag)
-	{
-		log("teleporting!!!\n");
-		this->position = position;
-		this->teleportFlag = true;
-	}
+    startLog();
+    log("Trying to teleport\n");
+    if (!this->teleportFlag)
+    {
+        log("teleporting!!!\n");
+        this->position = position;
+        this->teleportFlag = true;
+    }
 }
 
 int Player::getScore() const
 {
-	return this->score;
+    return this->score;
 }
 
 void Player::setScore(int score)
 {
-	this->score = score;
+    this->score = score;
 }
 
 int Player::getLifeCount() const
 {
-	return this->lifeCount;
+    return this->lifeCount;
 }
 
-void Player::acceptInteraction(Interaction& interaction) const 
+void Player::acceptInteraction(Interaction& interaction) const
 {
-	interaction.interact(*this);	
+    interaction.interact(*this);
 }
 
-bool Player::canShareTileWith(const GameEntity& gameEntity)  const
+bool Player::canShareTileWith(const GameEntity& gameEntity) const
 {
-	PlayerCanShareTile playerCanShareTile;
-	gameEntity.acceptInteraction(playerCanShareTile);
-	return playerCanShareTile.canShare;
+    PlayerCanShareTile playerCanShareTile;
+    gameEntity.acceptInteraction(playerCanShareTile);
+    return playerCanShareTile.canShare;
 }
 
-void Player::shareTileWith(const GameEntity& gameEntity) 
+void Player::shareTileWith(const GameEntity& gameEntity)
 {
-	PlayerShareTile playerShareTile(*this);	
-	gameEntity.acceptInteraction(playerShareTile);
+    PlayerShareTile playerShareTile(*this);
+    gameEntity.acceptInteraction(playerShareTile);
 }
 
 std::shared_ptr<Player> Player::clonePlayer() const
 {
-	// TODO is it leaking?
-	std::shared_ptr<Player> clonedPlayer = std::make_shared<Player>(*this);
-	return clonedPlayer;
+    // TODO is it leaking?
+    std::shared_ptr<Player> clonedPlayer = std::make_shared<Player>(*this);
+    return clonedPlayer;
 }
 
 std::shared_ptr<GameEntity> Player::clone() const
 {
-	return this->clonePlayer();
+    return this->clonePlayer();
 }
 
 std::shared_ptr<Player> Player::updatePlayer(const GameState& gameState) const
 {
-	std::shared_ptr<Player> updatedPlayer = std::make_shared<Player>(*this);
-	updatedPlayer->updateLifeCount(gameState);
-	updatedPlayer->interactWithEntities(gameState);
-	updatedPlayer->updateTeleportFlag(gameState);
-	updatedPlayer->updatePosition(gameState);
-	updatedPlayer->updateGhostEatingTime(gameState);
-	updatedPlayer->updateDirectionByUserInput(gameState.getUserInput());
-	startLog();
-	return updatedPlayer;
+    std::shared_ptr<Player> updatedPlayer = std::make_shared<Player>(*this);
+    updatedPlayer->updateLifeCount(gameState);
+    updatedPlayer->interactWithEntities(gameState);
+    updatedPlayer->updateTeleportFlag(gameState);
+    updatedPlayer->updatePosition(gameState);
+    updatedPlayer->updateGhostEatingTime(gameState);
+    updatedPlayer->updateDirectionByUserInput(gameState.getUserInput());
+    startLog();
+    return updatedPlayer;
 }
 
-std::shared_ptr<GameEntity> Player::update(const GameState& gameState) const 
+std::shared_ptr<GameEntity> Player::update(const GameState& gameState) const
 {
-	return this->updatePlayer(gameState);
+    return this->updatePlayer(gameState);
 }
 
 bool Player::updateDirectionByUserInput(char userInput)
 {
-	std::map<char, std::pair<int, int>> directionByUserInput =
-	{
-		{'k', {-1,  0}},
-		{'h', { 0, -1}},
-		{'l', { 0, +1}},
-		{'j', {+1,  0}}
-	};
-	if(directionByUserInput.find(userInput) == directionByUserInput.end())
-	{
-		return false;
-	}
-	this->direction = directionByUserInput[userInput];
-	return true;
+    std::map<char, std::pair<int, int>> directionByUserInput = {{'k', {-1, 0}}, {'h', {0, -1}}, {'l', {0, +1}}, {'j', {+1, 0}}};
+    if (directionByUserInput.find(userInput) == directionByUserInput.end())
+    {
+        return false;
+    }
+    this->direction = directionByUserInput[userInput];
+    return true;
 }
 
 void Player::updatePosition(const GameState& gameState)
 {
-	if(this->speedLevel < gameState.getSpeedLevel())
-	{
-		return;
-	}
-	int updatedPositionFirst = this->position.first + this->direction.first;
-	int updatedPositionSecond= this->position.second + this->direction.second;
-	std::pair<int, int> updatedPosition = {updatedPositionFirst, updatedPositionSecond};
-	if(this->canAccessPosition(gameState, updatedPosition))
-	{
-		startLog();
-		this->position = updatedPosition;
-	}
-
+    if (this->speedLevel < gameState.getSpeedLevel())
+    {
+        return;
+    }
+    int updatedPositionFirst = this->position.first + this->direction.first;
+    int updatedPositionSecond = this->position.second + this->direction.second;
+    std::pair<int, int> updatedPosition = {updatedPositionFirst, updatedPositionSecond};
+    if (this->canAccessPosition(gameState, updatedPosition))
+    {
+        startLog();
+        this->position = updatedPosition;
+    }
 }
+
 void Player::updateTeleportFlag(const GameState& gameState)
 {
-	if(this->speedLevel < gameState.getSpeedLevel())
-	{
-		return;
-	}
-	this->teleportFlag = false;
+    if (this->speedLevel < gameState.getSpeedLevel())
+    {
+        return;
+    }
+    this->teleportFlag = false;
 }
+
 void Player::interactWithEntities(const GameState& gameState)
 {
-	std::vector<std::shared_ptr<GameEntity>> entitiesOnSameTile = gameState.getEntitiesByPosition(this->position);
-	for(std::shared_ptr<GameEntity> entity : entitiesOnSameTile)
-	{
-		this->shareTileWith(*entity);
-	}
+    std::vector<std::shared_ptr<GameEntity>> entitiesOnSameTile = gameState.getEntitiesByPosition(this->position);
+    for (std::shared_ptr<GameEntity> entity : entitiesOnSameTile)
+    {
+        this->shareTileWith(*entity);
+    }
 }
 
 void Player::updateLifeCount(const GameState& gameState)
 {
-	this->lifeCount -= this->wasEaten(gameState);
+    this->lifeCount -= this->wasEaten(gameState);
 }
 
 bool Player::wasEaten(const GameState& gameState)
 {
-	std::vector<std::shared_ptr<GameEntity>> entitiesOnSameTile = gameState.getEntitiesByPosition(this->position);
-	for(std::shared_ptr<GameEntity> entity : entitiesOnSameTile)
-	{
-		PlayerCanBeEaten playerCanBeEaten(*this);
-		entity->acceptInteraction(playerCanBeEaten);
-		if(playerCanBeEaten.canBeEaten)
-		{
-			return true;
-		}
-	}
-	std::pair<int, int> nextPosition = {this->position.first + this->direction.first, this->position.second + this->direction.second};
-	std::vector<std::shared_ptr<GameEntity>> entitiesOnNextTile = gameState.getEntitiesByPosition(nextPosition);
-	for(std::shared_ptr<GameEntity> entity : entitiesOnNextTile)
-	{
-		PlayerCanBeEaten playerCanBeEaten(*this);
-		entity->acceptInteraction(playerCanBeEaten);
-		std::pair<int, int> entityNextPosition = 
-		{
-			entity->getPosition().first + entity->getDirection().first, 
-			entity->getPosition().second + entity->getDirection().second
-		};
-		if(playerCanBeEaten.canBeEaten && this->position == entityNextPosition)
-		{
-			return true;
-		}
-	}
-	return false;
+    std::vector<std::shared_ptr<GameEntity>> entitiesOnSameTile = gameState.getEntitiesByPosition(this->position);
+    for (std::shared_ptr<GameEntity> entity : entitiesOnSameTile)
+    {
+        PlayerCanBeEaten playerCanBeEaten(*this);
+        entity->acceptInteraction(playerCanBeEaten);
+        if (playerCanBeEaten.canBeEaten)
+        {
+            return true;
+        }
+    }
+    std::pair<int, int> nextPosition = {this->position.first + this->direction.first, this->position.second + this->direction.second};
+    std::vector<std::shared_ptr<GameEntity>> entitiesOnNextTile = gameState.getEntitiesByPosition(nextPosition);
+    for (std::shared_ptr<GameEntity> entity : entitiesOnNextTile)
+    {
+        PlayerCanBeEaten playerCanBeEaten(*this);
+        entity->acceptInteraction(playerCanBeEaten);
+        std::pair<int, int> entityNextPosition = {entity->getPosition().first + entity->getDirection().first,
+                                                  entity->getPosition().second + entity->getDirection().second};
+        if (playerCanBeEaten.canBeEaten && this->position == entityNextPosition)
+        {
+            return true;
+        }
+    }
+    return false;
 }
 
 bool Player::canAccessPosition(const GameState& gameState, std::pair<int, int> position) const
 {
-	std::vector<std::shared_ptr<GameEntity>> entitiesOnSameTile = gameState.getEntitiesByPosition(position);
-	if(!gameState.validPosition(position))
-	{
-		return false;
-	}
-	for(std::shared_ptr<GameEntity> entity : entitiesOnSameTile)
-	{
-		if(!this->canShareTileWith(*entity))
-		{
-			return false;
-		}
-	}
-	return true;
+    std::vector<std::shared_ptr<GameEntity>> entitiesOnSameTile = gameState.getEntitiesByPosition(position);
+    if (!gameState.validPosition(position))
+    {
+        return false;
+    }
+    for (std::shared_ptr<GameEntity> entity : entitiesOnSameTile)
+    {
+        if (!this->canShareTileWith(*entity))
+        {
+            return false;
+        }
+    }
+    return true;
 }
 
 int Player::getGhostEatingTime() const
 {
-	return this->ghostEatingTime;
+    return this->ghostEatingTime;
 }
 
 void Player::setGhostEatingTime(int time)
 {
-	this->ghostEatingTime = time;
+    this->ghostEatingTime = time;
 }
 
 void Player::updateGhostEatingTime(const GameState& gameState)
 {
-	if(this->speedLevel < gameState.getSpeedLevel())
-	{
-		return;
-	}
-	this->ghostEatingTime--;
-	if(this->ghostEatingTime < 0)
-	{
-		this->ghostEatingTime = 0;
-	}
+    if (this->speedLevel < gameState.getSpeedLevel())
+    {
+        return;
+    }
+    this->ghostEatingTime--;
+    if (this->ghostEatingTime < 0)
+    {
+        this->ghostEatingTime = 0;
+    }
 }

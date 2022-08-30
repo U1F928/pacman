@@ -1,42 +1,51 @@
 #include "ImitatorCanBeRespawned.h"
+
 ImitatorCanBeRespawned::ImitatorCanBeRespawned()
-:
-	canBeRespawned(false)
+    : canBeRespawned(false)
 {
 }
-void ImitatorCanBeRespawned::interact(const Wall&) 
+
+void ImitatorCanBeRespawned::interact(const Wall&)
 {
-	this->canBeRespawned = false;
+    this->canBeRespawned = false;
 }
-void ImitatorCanBeRespawned::interact(const Teleport&) 
+
+void ImitatorCanBeRespawned::interact(const Teleport&)
 {
-	this->canBeRespawned = false;
+    this->canBeRespawned = false;
 }
-void ImitatorCanBeRespawned::interact(const PowerPellet&) 
+
+void ImitatorCanBeRespawned::interact(const PowerPellet&)
 {
-	this->canBeRespawned = false;
+    this->canBeRespawned = false;
 }
-void ImitatorCanBeRespawned::interact(const RespawnPoint&) 
+
+void ImitatorCanBeRespawned::interact(const RespawnPoint&)
 {
-	this->canBeRespawned = true;
+    this->canBeRespawned = true;
 }
-void ImitatorCanBeRespawned::interact(const Coin&) 
+
+void ImitatorCanBeRespawned::interact(const Coin&)
 {
-	this->canBeRespawned = false;
+    this->canBeRespawned = false;
 }
-void ImitatorCanBeRespawned::interact(const Player&) 
+
+void ImitatorCanBeRespawned::interact(const Player&)
 {
-	this->canBeRespawned = false;
+    this->canBeRespawned = false;
 }
-void ImitatorCanBeRespawned::interact(const Imitator&) 
+
+void ImitatorCanBeRespawned::interact(const Imitator&)
 {
-	this->canBeRespawned = false;
+    this->canBeRespawned = false;
 }
-void ImitatorCanBeRespawned::interact(const Wanderer&) 
+
+void ImitatorCanBeRespawned::interact(const Wanderer&)
 {
-	this->canBeRespawned = false;
+    this->canBeRespawned = false;
 }
-void ImitatorCanBeRespawned::interact(const Mimic&) 
+
+void ImitatorCanBeRespawned::interact(const Mimic&)
 {
-	this->canBeRespawned = false;
+    this->canBeRespawned = false;
 }

@@ -2,29 +2,31 @@
 #include "../../GameEntity.h"
 class Interaction;
 class GameEntity;
+
 class Wall : public GameEntity
 {
-public:
-	Wall(char symbol, std::pair<int, int> position);
+  public:
+    Wall(char symbol, std::pair<int, int> position);
 
-	Wall& operator = (const Wall& wall);
+    Wall& operator=(const Wall& wall);
 
-	Wall(const Wall& wall);
+    Wall(const Wall& wall);
 
-	~Wall();
+    ~Wall();
 
-	virtual char getSymbol() const override;
+    virtual char getSymbol() const override;
 
-	virtual std::pair<int, int> getPosition() const override;
+    virtual std::pair<int, int> getPosition() const override;
 
-	virtual std::pair<int, int> getDirection() const override;
+    virtual std::pair<int, int> getDirection() const override;
 
-	void acceptInteraction(Interaction& interaction) const override;
+    void acceptInteraction(Interaction& interaction) const override;
 
-	std::shared_ptr<GameEntity> clone() const override;
+    std::shared_ptr<GameEntity> clone() const override;
 
-	std::shared_ptr<GameEntity> update(const GameState& gameState) const override;
-private:
-	char symbol;
-	std::pair<int, int> position;
+    std::shared_ptr<GameEntity> update(const GameState& gameState) const override;
+
+  private:
+    char symbol;
+    std::pair<int, int> position;
 };

@@ -1,42 +1,51 @@
 #include "PowerPelletCanBeEaten.h"
+
 PowerPelletCanBeEaten::PowerPelletCanBeEaten()
-:
-	canBeEaten(false)
+    : canBeEaten(false)
 {
 }
-void PowerPelletCanBeEaten::interact(const Wall&) 
+
+void PowerPelletCanBeEaten::interact(const Wall&)
 {
-	this->canBeEaten = false;
+    this->canBeEaten = false;
 }
+
 void PowerPelletCanBeEaten::interact(const RespawnPoint&)
 {
-	this->canBeEaten = false;
+    this->canBeEaten = false;
 }
-void PowerPelletCanBeEaten::interact(const Teleport&) 
+
+void PowerPelletCanBeEaten::interact(const Teleport&)
 {
-	this->canBeEaten = false;
+    this->canBeEaten = false;
 }
-void PowerPelletCanBeEaten::interact(const Coin&) 
+
+void PowerPelletCanBeEaten::interact(const Coin&)
 {
-	this->canBeEaten = false;
+    this->canBeEaten = false;
 }
-void PowerPelletCanBeEaten::interact(const PowerPellet&) 
+
+void PowerPelletCanBeEaten::interact(const PowerPellet&)
 {
-	this->canBeEaten = false;
+    this->canBeEaten = false;
 }
-void PowerPelletCanBeEaten::interact(const Player&) 
+
+void PowerPelletCanBeEaten::interact(const Player&)
 {
-	this->canBeEaten = true;
+    this->canBeEaten = true;
 }
-void PowerPelletCanBeEaten::interact(const Imitator&) 
+
+void PowerPelletCanBeEaten::interact(const Imitator&)
 {
-	this->canBeEaten = false;
+    this->canBeEaten = false;
 }
-void PowerPelletCanBeEaten::interact(const Wanderer&) 
+
+void PowerPelletCanBeEaten::interact(const Wanderer&)
 {
-	this->canBeEaten = false;
+    this->canBeEaten = false;
 }
-void PowerPelletCanBeEaten::interact(const Mimic&) 
+
+void PowerPelletCanBeEaten::interact(const Mimic&)
 {
-	this->canBeEaten = false;
+    this->canBeEaten = false;
 }
