@@ -40,7 +40,7 @@ Start the game
 make run
 ``` 
 
-### Usage
+### Game Controls
 
 | Action        | Key           |
 | ------------- | ------------- |
@@ -50,7 +50,7 @@ make run
 | Move up       | k             |
 | Move right    | l             |
 
-### Screenshots
+## Screenshots
 ![screenshot-pacman](https://user-images.githubusercontent.com/110688318/187525177-63ef06a9-b317-40db-9b41-8be22df242b3.png)
 
 
