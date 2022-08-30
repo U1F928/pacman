@@ -42,13 +42,6 @@ make run
 
 ### Usage
 
-Quit the game  : Esc
-Move left      : h
-Move down      : j
-Move right     : l
-Move up        : k
-
-
 | Action        | Key           |
 | ------------- | ------------- |
 | Quit the game | Esc           |
