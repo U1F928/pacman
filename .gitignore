@@ -2,4 +2,5 @@
 *.swp
 logFile.txt
 valg_out
+pacman
 .vscode
