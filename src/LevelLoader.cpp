@@ -140,6 +140,7 @@ int LevelLoader::getMaxWidth() const
 
 bool LevelLoader::createEntityFromSymbol(char symbol, int x, int y)
 {
+    x -= this->parameterCount;
     switch (symbol)
     {
     case 'p':
