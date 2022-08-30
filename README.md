@@ -1,6 +1,6 @@
 # Pacman
  
-Text based arcade game heavily inspired by Pacman.
+Terminal based arcade game heavily inspired by Pacman.
  
 ## Built With
  
@@ -44,8 +44,15 @@ make run
 
 | Action        | Key           |
 | ------------- | ------------- |
-| Quit the game | Esc           |
+| Quit          | Esc           |
 | Move left     | h             |
 | Move down     | j             |
 | Move up       | k             |
 | Move right    | l             |
+
+### Screenshots
+![screenshot-pacman](https://user-images.githubusercontent.com/110688318/187525177-63ef06a9-b317-40db-9b41-8be22df242b3.png)
+
+
+
+
