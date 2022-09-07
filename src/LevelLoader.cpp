@@ -24,7 +24,7 @@
 
 bool LevelLoader::getPathToFileFromUser()
 {
-    std::cout << "Input path to a file containing the desired game level (e.g. 'examples/lv1'):" << std::endl;
+    std::cout << "Input path to a file containing the desired game level (e.g. 'levels/lv1'):" << std::endl;
     while (true)
     {
         std::string pathToFile;
