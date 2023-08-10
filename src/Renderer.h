@@ -19,7 +19,7 @@ class Renderer
     void endNcurses();
     /**
      * @brief Render all the relevant information from the game state to the screen
-     * @param gameState, game state to be rendered
+     * @param gameState game state to be rendered
      */
     void renderGameState(const GameState& gameState);
 
