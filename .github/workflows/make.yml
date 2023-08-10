@@ -1,0 +1,32 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches:
+      - "**"
+  pull_request:
+    branches:
+      - "**"
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Install Doxygen and Graphviz 
+      run: sudo apt install doxygen graphviz
+
+    - name: Compile the game
+      run: make compile
+
+    - name: Generate the documentation
+      run: make doc
+
+    - name: Remove all the generated files
+      run: make clean
+
+    - name: Compile the game and create the documentation
+      run: make all

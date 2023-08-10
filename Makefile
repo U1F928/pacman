@@ -58,7 +58,7 @@ compile: $(PACMAN_PREREQUISITES)
 
 .PHONY: clean
 clean:
-	rm pacman src/*.o; rm src/GameEntities/*/*.o; rm -r doc; rm logFile.txt;
+	rm pacman src/*.o; rm src/GameEntities/*/*.o; rm -r doc; rm logFile.txt || true
 
 src/Game.o: src/Game.cpp src/Game.h src/GameState.h src/Renderer.h \
  src/GameEntity.h src/LevelLoader.h src/GameEntities/Player/Player.h \
