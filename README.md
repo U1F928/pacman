@@ -11,18 +11,18 @@ Terminal-based arcade game heavily inspired by Pacman, that allows players to bu
  
 ### Prerequisites 
  
+* git
 * g++
 * ncurses
 * make
 * doxygen
 * graphviz
-* git
  
 ### Installation 
  
 Clone the project 
 ``` 
-$ git clone https://github.com/U1F928/pacman
+git clone --depth 1 https://github.com/U1F928/pacman
 ``` 
 Go into the project directory
 ``` 
