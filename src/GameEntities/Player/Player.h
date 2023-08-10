@@ -8,15 +8,15 @@ class Player : public GameEntity
   public:
     /**
      * @brief Constructor
-     * @param symbol, symbol that represents Player
-     * @param positon, Player's position
-     * @param speedLevel, Player's speed level
-     * @param direction, Player's direction
-     * @param lifeCount, Player's number of lifes
-     * @param score, Player's score
-     * @param ghostEatingTime, how much time Player has left in his ghost eating form
-     * @param ghostEatingSymbol, symbol representing Player's ghost eating form
-     * @param teleportFlag, whether Player has recently teleported
+     * @param symbol symbol that represents player
+     * @param position player's position
+     * @param speedLevel player's speed level
+     * @param direction player's direction
+     * @param lifeCount player's number of lifes
+     * @param score player's score
+     * @param ghostEatingTime how much time player has left in his ghost eating form
+     * @param ghostEatingSymbol symbol representing player's ghost eating form
+     * @param teleportFlag whether player has recently teleported
      */
     Player(char symbol,
            std::pair<int, int> position,
@@ -30,13 +30,13 @@ class Player : public GameEntity
 
     /**
      * @brief Deep copy assignment operator
-     * @param player, another Player instance
+     * @param player another Player instance
      * @return itself
      */
     Player& operator=(const Player& player);
     /**
      * @brief Copy constructor, implemented by assignment operator
-     * @param player, another instance of Player
+     * @param player another instance of Player
      */
     Player(const Player& player);
     /**
@@ -56,7 +56,7 @@ class Player : public GameEntity
     int getScore() const;
     /**
      * @brief Set Player's score
-     * @param score, new value of Player's score
+     * @param score new value of Player's score
      */
     void setScore(int score);
     /**
@@ -66,7 +66,7 @@ class Player : public GameEntity
     int getGhostEatingTime() const;
     /**
      * @brief Set Player's time left in the ghost eating form
-     * @param time, time left in the ghost eating form
+     * @param time time left in the ghost eating form
      */
     void setGhostEatingTime(int time);
     /**
@@ -76,7 +76,7 @@ class Player : public GameEntity
     int getLifeCount() const;
     /**
      * @brief Try (teleport flag) to teleport player to the given position
-     * @param position, the given position
+     * @param position the given position
      */
     void teleportToPosition(std::pair<int, int> position);
 
@@ -109,18 +109,18 @@ class Player : public GameEntity
 
     /**
      * @brief Check whether Player can share tile with the given entity
-     * @param gameEntity, the given entity
+     * @param gameEntity the given entity
      * @return true if a tile can be shared, false otherwise
      */
     bool canShareTileWith(const GameEntity& gameEntity) const;
     /**
      * @brief Share tile with the given entity
-     * @param gameEntity, the given entity
+     * @param gameEntity the given entity
      */
     void shareTileWith(const GameEntity& gameEntity);
     /**
      * @brief Update Player's direction by the given user's input
-     * @param userInput, user's input
+     * @param userInput user's input
      * @return true if the input was valid, false otherwise
      */
     bool updateDirectionByUserInput(char userInput);
@@ -157,8 +157,8 @@ class Player : public GameEntity
     bool wasEaten(const GameState& gameState);
     /**
      * @brief Check whether Player can access the given position (other entities aren't blocking it)
-     * @param position, the given position
-     * @param gameState, game state
+     * @param position the given position
+     * @param gameState game state
      * @return true if Player can access the given position, false otherwise
      */
     bool canAccessPosition(const GameState& gameState, std::pair<int, int> position) const;

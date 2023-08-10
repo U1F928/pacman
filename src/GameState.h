@@ -18,13 +18,13 @@ class GameState
     GameState();
     /**
      * @brief Deep copy assignment operator
-     * @param gameState, another gameState instance
+     * @param gameState another gameState instance
      * @return itself
      */
     GameState& operator=(const GameState& gameState);
     /**
      * @brief Deep copy copy constructor, implemented by assignment operator
-     * @param gameState, another gameState instance
+     * @param gameState another gameState instance
      */
     GameState(const GameState& gameState);
     /**
@@ -33,12 +33,12 @@ class GameState
     ~GameState();
     /**
      * @brief Set max height of the level
-     * @param height, max height
+     * @param height max height
      */
     void setHeight(int height);
     /**
      * @brief Set max width of the level
-     * @param width, max width
+     * @param width max width
      */
     void setWidth(int width);
     /**
@@ -53,12 +53,12 @@ class GameState
     int getWidth() const;
     /**
      * @brief Set max speed level of the game
-     * @param speedLevel, max speed level
+     * @param speedLevel max speed level
      */
     void setMaxSpeedLevel(int speedLevel);
     /**
      * @brief Set speed level of the game
-     * @param speedLevel, speed level
+     * @param speedLevel speed level
      */
     void setSpeedLevel(int speedLevel);
     /**
@@ -68,17 +68,17 @@ class GameState
     int getSpeedLevel() const;
     /**
      * @brief Insert user input into the game state, so other entities (mostly player entity) can react to it
-     * @param userInput, user input
+     * @param userInput user input
      */
     void insertUserInput(char userInput);
     /**
      * @brief Insert player entity into the game state
-     * @param playerEntity, player entity
+     * @param playerEntity player entity
      */
     void insertPlayer(std::shared_ptr<Player> playerEntity);
     /**
      * @brief Insert game entity other than player into the game state
-     * @param gameEntity, game entity
+     * @param gameEntity game entity
      */
     void insertEntity(std::shared_ptr<GameEntity> gameEntity);
     /**
@@ -118,19 +118,19 @@ class GameState
     bool playerWon() const;
     /**
      * @brief Check if the given position isn't out of bounds (0, maxHeight/maxWidth)
-     * @param position, position to check
+     * @param position position to check
      * @return return true if position isn't out of bounds, false otherwise
      */
     bool validPosition(std::pair<int, int> position) const;
     /**
      * @brief Get all positions that neighbor, with the given position
-     * @param position, given position
+     * @param position given position
      * @return return array of neighboring positions
      */
     std::vector<std::pair<int, int>> getNeighborPositions(std::pair<int, int> position) const;
     /**
      * @brief Get all entities on the given position
-     * @param position, given position
+     * @param position given position
      * @return return array of entities on the given position
      */
     std::vector<std::shared_ptr<GameEntity>> getEntitiesByPosition(std::pair<int, int> position) const;

@@ -75,16 +75,16 @@ void Renderer::renderScore(const GameState& gameState)
     std::string currentScore = std::to_string(gameState.getPlayerScore());
     std::string requiredScore = std::to_string(gameState.getRequiredScore());
     printw("SCORE: ");
-    printw(currentScore.c_str());
+    printw("%s", currentScore.c_str());
     printw("/");
-    printw(requiredScore.c_str());
+    printw("%s", requiredScore.c_str());
 }
 
 void Renderer::renderLifeCount(const GameState& gameState)
 {
     printw("LIFE COUNT: ");
     std::string lifeCount = std::to_string(gameState.getPlayerLifeCount());
-    printw(lifeCount.c_str());
+    printw("%s", lifeCount.c_str());
 }
 
 void Renderer::renderGameStateSummary(const GameState& gameState)

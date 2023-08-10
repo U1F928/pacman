@@ -3,6 +3,7 @@
 #include "GameState.h"
 #include <memory>
 #include <vector>
+#include <string>
 
 /**
  * @brief Class responsible for safe loading of game level data from a file
@@ -17,7 +18,7 @@ class LevelLoader
     bool loadFromFile();
     /**
      * @brief Load's the data back into the given game state
-     * @param gameState, game state instance
+     * @param gameState game state instance
      */
     void loadIntoGameState(GameState& gameState);
 
