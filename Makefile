@@ -47,7 +47,7 @@ run:
 all : compile doc
 
 doc:
-	doxygen $(DOXYFILE) > /dev/null
+	doxygen $(DOXYFILE)
 
 .PHONY: compile
 compile: $(PACMAN_PREREQUISITES)
