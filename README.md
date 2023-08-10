@@ -1,6 +1,6 @@
-# Pacman
+# Pac-Man
  
-Terminal-based arcade game heavily inspired by Pacman, that allows players to build and play their own game levels.
+Terminal-based arcade game heavily inspired by Pac-Man, that allows players to build and play their own game levels.
  
 ## Built With
  
